@@ -1,5 +1,6 @@
 
-const { Posts } = require("../models/Posts");
+const Posts  = require("../models/Posts");
+ 
 
 //will be used to handle files / images
 const fs = require('fs');
@@ -12,15 +13,6 @@ const { setUncaughtExceptionCaptureCallback } = require('process');
 //GET Renvoie un tableau de tous les posts 
 
 exports.getAllPosts =  async (req, res) => {
- 
-  
-//   try {
-//     const listOfPosts = await Posts.findAll();
-//     res.json(listOfPosts);
-//   } catch(err) {
-//     alert(err); 
-//   }
-
 
     try {
         const listOfPosts = await Posts.findAll();
@@ -50,4 +42,29 @@ exports.createPost = async ( req, res) => {
 }
 
 
+// Modify a post // PUT
 
+exports.modifyPost = async (req, res) => {
+    const post = req.body; 
+    
+    post.set({
+    title: post.body.title,
+    postText: post.body.postText, 
+    
+    });
+    await post.save();
+}
+
+
+exports.deletePost = async (req, res) => {
+    
+    //need to find a way to  store the userId of the user clickin , the userId of the user that made the comment and the adminuserId
+
+    if ( userId == authorizedUserId) {
+        const id = req.params.id; 
+        const post = await Posts.findByPk(id); 
+        post.destroy();
+    }
+    
+
+}

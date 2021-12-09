@@ -2,16 +2,13 @@ const express = require("express");
 const router = express.Router();
 const { Comments } = require("../models");
 
-router.get("/:postId", async (req, res) => {
-  const postId = req.params.postId;
-  const comments = await Comments.findAll({ where: { PostId: postId } });
-  res.json(comments);
-});
+const commentCtrl = require('../controllers/Comments'); 
 
- router.post("/", async (req, res) => {
-    const comment = req.body;
-    await Comments.create(comment);
-    res.json(comment);
-  });
+router.get('/:postId', commentCtrl.getComments); 
+router.post('/', commentCtrl.postComment); 
+router.delete('/:commentId', commentCtrl.deleteComment); 
+router.put('/:commentId', commentCtrl.updateComment); 
+
+
   
 module.exports = router; 
