@@ -4,15 +4,21 @@ const bcrypt = require('bcrypt');
 //jwt installé mais pas encore utilisé
 const jwt = require('jsonwebtoken');
 
-exports.signup = async (req, res) => {
+exports.signup = (req, res) => {
     const { username, password } = req.body;
+    console.log('username : ' + username + '  password : ' + password); 
     bcrypt.hash(password, 10).then((hash) => {
       Users.create({
         username: username,
-        password: hash,
-      });
-      res.json("SUCCESS");
-    });
+        password: hash
+      })
+      .then(user => {
+        return res.status(201).json("SUCCESS");
+      })
+      .catch( error => res.status(500).json( {error: error, message: 'erreur de création utilisateur'}));
+     
+    })
+    .catch(error => res.status(500).json( {error: error, message: 'erreur mot de passe'})); 
 };
 
 exports.login =  async (req, res) => {
