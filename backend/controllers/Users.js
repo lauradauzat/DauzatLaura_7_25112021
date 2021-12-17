@@ -1,16 +1,18 @@
-const Users  = require("../models/Users");
+const { Users }  = require("../models");
 const bcrypt = require('bcrypt'); 
 
 //jwt installé mais pas encore utilisé
 const jwt = require('jsonwebtoken');
 
 exports.signup = (req, res) => {
-    const { username, password } = req.body;
+    const { username, email, password, isAdmin } = req.body;
     console.log('username : ' + username + '  password : ' + password); 
     bcrypt.hash(password, 10).then((hash) => {
       Users.create({
         username: username,
-        password: hash
+        email: email,
+        password: hash,
+        isAdmin: isAdmin
       })
       .then(user => {
         return res.status(201).json("SUCCESS");
@@ -21,9 +23,13 @@ exports.signup = (req, res) => {
     .catch(error => res.status(500).json( {error: error, message: 'erreur mot de passe'})); 
 };
 
-exports.login =  async (req, res) => {
+
+
+
+exports.login =  async (req, res, next) => {
 
     const { username, password}  = req.body; 
+  
     const user = await Users.findOne({ where: {username: username} }); 
  
     if (!user) res.json({ error: "User doesn't  exist"}); 

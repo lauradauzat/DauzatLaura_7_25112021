@@ -1,9 +1,12 @@
 
 const Posts  = require("../models/Posts");
- 
 
-//will be used to handle files / images
+//imageUpload 
+const multer = require('multer');
+const path = require('path');
 const fs = require('fs');
+
+
 //will be used to handle token security 
 const jwt = require('jsonwebtoken');
 // ??? 
@@ -35,10 +38,17 @@ exports.getOnePost = async (req, res) => {
 
 // POST -- Creating a new post
 
-exports.createPost = async ( req, res) => {
-    const post = req.body;
-    await Posts.create(post);
-    res.json(post);
+exports.createPost = async ( req, res, next) => {
+    console.log('req.body :' + req.body);
+
+    let postContent = {
+        postText: req.body.postText,
+        image: req.file.path
+    }
+   
+    const post = await Posts.create(postContent);
+    res.status(200).send(post); 
+    console.log('post : '+ post);
 }
 
 
@@ -60,11 +70,13 @@ exports.deletePost = async (req, res) => {
     
     //need to find a way to  store the userId of the user clickin , the userId of the user that made the comment and the adminuserId
 
-    if ( userId == authorizedUserId) {
+   
         const id = req.params.id; 
         const post = await Posts.findByPk(id); 
         post.destroy();
-    }
+    
     
 
 }
+
+

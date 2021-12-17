@@ -1,13 +1,14 @@
 const express = require("express");
-const { route } = require("..");
+//const { route } = require("..");
 const router = express.Router();
-//const { Posts } = require("../models");
+const Posts = require("../models/Posts");
 
+const multer = require('../middlewares/multer');
 const postCtrl = require ('../controllers/Posts'); 
 
 router.get('/', postCtrl.getAllPosts);
 router.get("/byId/:id", postCtrl.getOnePost); 
-router.post('/', postCtrl.createPost); 
+router.post('/', multer, postCtrl.createPost); 
 router.put('/:id', postCtrl.modifyPost); 
 router.delete('/:id', postCtrl.deletePost); 
 
