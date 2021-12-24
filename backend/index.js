@@ -23,8 +23,6 @@ db.sequelize.sync().then(() => {
 
 app.use (bodyParser.json()); 
 
-
-
 app.use('/posts', postRoutes);
 app.use('/auth', userRoutes);
 app.use('/comments', commentRoutes); 

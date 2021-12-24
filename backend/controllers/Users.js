@@ -38,6 +38,41 @@ exports.login =  async (req, res, next) => {
       if (!match) res.json({error: "Wrong password"}); 
  
       res.json ("You are logged in"); 
+         // a rajouter : va renvoyer userId et token dans le local storage du navigateur 
       
     }); 
+
+ 
 };
+
+
+exports.getProfile = async (req, res, next) => {
+  //maybe not body ? maybe dans le localStorage ? 
+  const id = req.params.id; 
+  const user = await Users.findByPk(id); 
+
+  // le mettre dans un try catch
+  res.status(200).json (user); 
+
+}
+
+exports.updateProfile = async (req, res, next) => {
+  const id = req.params.id; 
+  const user = await Users.findByPk(id);
+  user.update({
+    username: req.body.username
+  })
+  .then(() => res.status(200).json({ message: 'Objet modifié !'}))
+  .catch(error => res.status(400).json({ error: error }));
+};
+
+exports.deleteProfile = async (req, res, next) => {
+  const id = req.params.id; 
+  const user = await Users.findByPk(id); 
+  user.destroy()
+  .then(() => res.status(200).json({ message: 'Objet supprimé !'}))
+  .catch(error => res.status(500).json({ error: error }));
+
+};
+
+

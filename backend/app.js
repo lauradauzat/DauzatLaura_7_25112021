@@ -6,6 +6,8 @@ const cors = require("cors");
 const postRoutes = require('./routes/Posts');
 const userRoutes = require('./routes/Users');
 const commentRoutes = require('./routes/Comments');
+const likeRoutes = require('./routes/Likes'); 
+const signalRoutes = require('./routes/Signalements')
 const path = require('path');
 const bodyParser = require("body-parser");
 
@@ -26,5 +28,7 @@ app.use('/images', express.static('./images'));
 app.use('/posts', postRoutes);
 app.use('/auth', userRoutes);
 app.use('/comments', commentRoutes); 
+app.use('/likes', likeRoutes); 
+app.use('/signal', signalRoutes); 
 
 module.exports = app; 

@@ -1,5 +1,5 @@
 
-const Posts  = require("../models/Posts");
+const { Posts }  = require("../models");
 
 //imageUpload 
 const multer = require('multer');
@@ -39,7 +39,7 @@ exports.getOnePost = async (req, res) => {
 // POST -- Creating a new post
 
 exports.createPost = async ( req, res, next) => {
-    console.log('req.body :' + req.body);
+    //console.log('req.body :' + req.body);
 
     let postContent = {
         postText: req.body.postText,
@@ -54,16 +54,17 @@ exports.createPost = async ( req, res, next) => {
 
 // Modify a post // PUT
 
-exports.modifyPost = async (req, res) => {
-    const post = req.body; 
+
+exports.modifyPost = async (req, res, next) => {
+    const id = req.params.id; 
+    const post = await Posts.findByPk(id); 
+    //console.log(post); 
+    console.log(post.postText);
     
-    post.set({
-    title: post.body.title,
-    postText: post.body.postText, 
-    
-    });
-    await post.save();
-}
+    await post.update({ postText: req.body.postText })
+      .then(() => res.status(200).json({ post, message: 'Objet modifié !'}))
+      .catch(error => res.status(400).json({ error }));
+  };
 
 
 exports.deletePost = async (req, res) => {
@@ -77,6 +78,6 @@ exports.deletePost = async (req, res) => {
     
     
 
-}
+};
 
 

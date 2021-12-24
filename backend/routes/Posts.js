@@ -1,7 +1,6 @@
 const express = require("express");
 //const { route } = require("..");
 const router = express.Router();
-const Posts = require("../models/Posts");
 
 const multer = require('../middlewares/multer');
 const postCtrl = require ('../controllers/Posts'); 
