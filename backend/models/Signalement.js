@@ -2,7 +2,7 @@ module.exports = (sequelize, DataTypes) => {
     const Signalements = sequelize.define("Signalements", {
       userId: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: false
       },
       postId: {
         type: DataTypes.INTEGER, 

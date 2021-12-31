@@ -60,7 +60,9 @@ exports.updateProfile = async (req, res, next) => {
   const id = req.params.id; 
   const user = await Users.findByPk(id);
   user.update({
-    username: req.body.username
+    username: req.body.username,  
+    email: req.body.email,
+    isAdmin: req.body.isAdmin
   })
   .then(() => res.status(200).json({ message: 'Objet modifié !'}))
   .catch(error => res.status(400).json({ error: error }));

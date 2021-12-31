@@ -2,11 +2,11 @@ module.exports = (sequelize, DataTypes) => {
     const Likes = sequelize.define("Likes", {
       userId: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       postId: {
         type: DataTypes.INTEGER, 
-        allowNull: false
+        allowNull: true,
       }, 
     });
   

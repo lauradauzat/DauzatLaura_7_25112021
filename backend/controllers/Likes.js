@@ -3,23 +3,20 @@ const { Posts } = require('../models/');
 
 //doesn't work try again later
 
-exports.addLike = async ( req, res, next) => {
-    console.log('hello'); 
-
+exports.addLike = ( req, res, next) => {
    //pour récupérer le userId utiliser plus tard le localstorage plutôt que le req.body
-   const userId = req.body.id; 
-   const postId = req.params.id; 
-   console.log(userId);
+   const userId = req.body.userId; 
+   const postId = req.body.postId; 
+   console.log("USER ID  : " + userId);
    console.log(postId); 
 
-   await Likes.create({
-       userId: 5, 
-       postId: 2
-   })
-   .then(like => {
+   const newLike = Likes.create({
+       userId: userId, 
+       postId: postId
+   }).then(like => {
        return res.status(201).json("YESS"); 
    })
-   .catch( error => res.status(500).json( {error: error, message: 'erreur'}));
+   .catch( error => {return res.status(500).json( {error: error, message: 'erreur'})});
 }; 
 
 
