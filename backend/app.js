@@ -28,7 +28,7 @@ app.use('/images', express.static('./images'));
 app.use('/posts', postRoutes);
 app.use('/auth', userRoutes);
 app.use('/comments', commentRoutes); 
-app.use('/likes', likeRoutes); 
-app.use('/signal', signalRoutes); 
+//app.use('/likes', likeRoutes); 
+//app.use('/signal', signalRoutes); 
 
 module.exports = app; 

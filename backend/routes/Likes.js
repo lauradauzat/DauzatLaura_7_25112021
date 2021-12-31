@@ -3,7 +3,9 @@ const router = express.Router();
 
 const { Likes } = require ('../controllers'); 
 
-router.post('/', Likes.addLike);
+// Not used, doesn't work, déplacé dans les routes posts 
+
+//router.post('/', Likes.addLike);
 
 
 module.exports = router;

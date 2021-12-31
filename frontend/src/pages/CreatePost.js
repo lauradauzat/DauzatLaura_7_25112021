@@ -34,15 +34,8 @@ function CreatePost() {
         validationSchema={validationSchema}
       >
         <Form className="formContainer">
-          <label>Title: </label>
-          <ErrorMessage name="title" component="span" />
-          <Field
-            autocomplete="off"
-            id="inputCreatePost"
-            name="title"
-            placeholder="(Ex. Title...)"
-          />
-          <label>Post: </label>
+        
+          <label>Que voulez vous dire ?  </label>
           <ErrorMessage name="postText" component="span" />
           <Field
             autocomplete="off"
@@ -50,16 +43,8 @@ function CreatePost() {
             name="postText"
             placeholder="(Ex. Post...)"
           />
-          <label>Username: </label>
-          <ErrorMessage name="username" component="span" />
-          <Field
-            autocomplete="off"
-            id="inputCreatePost"
-            name="username"
-            placeholder="(Ex. John123...)"
-          />
 
-          <button type="submit"> Create Post</button>
+          <button type="submit"> Publier</button>
         </Form>
       </Formik>
     </div>

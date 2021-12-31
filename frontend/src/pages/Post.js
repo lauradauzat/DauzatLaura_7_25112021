@@ -17,7 +17,6 @@ function Post() {
     <div className="postPage">
       <div className="leftSide">
         <div className="post" id="individual">
-          <div className="title"> {postObject.title} </div>
           <div className="body">{postObject.postText}</div>
           <div className="footer">{postObject.username}</div>
         </div>
