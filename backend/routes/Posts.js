@@ -10,8 +10,11 @@ router.get("/byId/:id", postCtrl.getOnePost);
 router.post('/', multer, postCtrl.createPost); 
 router.put('/:id', postCtrl.modifyPost); 
 router.delete('/:id', postCtrl.deletePost); 
+
 router.post('/likes', postCtrl.addLike); 
+
 router.post('/signal', postCtrl.addSignal); 
+router.get('/signal', postCtrl.getAllSignals);
 router.delete('/signal', postCtrl.deleteSignal); 
 
 

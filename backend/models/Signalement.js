@@ -2,11 +2,11 @@ module.exports = (sequelize, DataTypes) => {
     const Signalements = sequelize.define("Signalements", {
       userId: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: true
       },
       postId: {
         type: DataTypes.INTEGER, 
-        allowNull: false
+        allowNull: true
       }, 
       commentId: {
           type: DataTypes.INTEGER, 

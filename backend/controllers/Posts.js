@@ -126,20 +126,47 @@ exports.addSignal = async ( req, res, next) => {
    .catch( error => res.status(500).json( {error: error, message: 'erreur'}));
 }; 
 
-
-
-exports.deleteSignal = async (req, res, next) => {
-    // to be changed to localStorage 
-    userConnected = req.body.userConnected ;  
-    signalementId = req.body.signalementId ; 
-    const signal = await Signalements.findByPk(signalementId);
-    const user = await Users.findByPk(userConnected); 
-    
-    if (user.isAdmin == 1) {
-        signal.destroy(); 
-        return res.status(201).json("Signal deleted");
-    }
-    
-    //Je n'ai pas réussi à intégrer la try/catch correctement 
-
+exports.deleteSignal = async ( req, res, next) => {
+   
+    res.json(" coucou"); 
 };
+
+
+exports.getAllSignals = async (req,res, next) => {
+    try {
+        const listOfSignals = await Signalements.findAll();
+        console.log(listOfSignals); 
+        res.json(listOfSignals);
+    }
+    catch(e) {
+        console.log('Catch an error: ', e)
+    }
+}; 
+
+
+// exports.deleteSignal =  async (req, res, next) => {
+//     // to be changed to localStorage 
+//    // userConnected = req.body.userConnected ;  
+    
+//     //signalementId = req.body.signalementId ; 
+//     await Signalements.findOne({ where: { id: 1 } })
+//     .then( signalement => {
+//         signalement.destroy()
+//         .then(() => {
+//             return res.status(201).json("Signal deleted");
+//         })   
+//         .catch(error => res.status(500).json( {error: error, message: 'erreur de suppression'}));
+//     })
+//     .catch(error => res.status(500).json( {error: error, message: 'Ne trouve pas le signalement'}));
+
+//     //const user = await Users.findByPk(userConnected); 
+
+//     //isAdmin à mettre dans un middleware
+//     //if (user.isAdmin == 1) {
+       
+        
+//     //}
+    
+//     //Je n'ai pas réussi à intégrer la try/catch correctement 
+
+// };

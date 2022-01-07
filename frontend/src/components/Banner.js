@@ -1,6 +1,6 @@
 function Banner() {
     return (
-        <div class="header">
+        <div className="header">
             <h1>Groupomania</h1>
         </div>
          
