@@ -28,6 +28,7 @@ import PostsList from './PostsList'
 import SignUp from './SignUp'
 import SignIn from './SignIn'
 import CreateAPost from './CreateAPost'
+import Comments from './Comments'
 
 function App() {
     return (
@@ -38,6 +39,7 @@ function App() {
         <CreateAPost />
 
         <PostsList/>
+        <Comments />
       </div>
       
     ) 

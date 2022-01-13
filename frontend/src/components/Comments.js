@@ -1,9 +1,8 @@
 
 import React from "react";
 import './App';
-import ImgContainer from "./ImgContainer";
 
-class PostsList extends React.Component {
+class Comments extends React.Component {
 
     // Constructor 
     constructor(props) {
@@ -19,8 +18,8 @@ class PostsList extends React.Component {
     // execute the code 
     componentDidMount() {
         fetch(
-        "http://localhost:3001/posts")
-            .then((res) => res.json(console.log(res)))
+        "http://localhost:3001/comments/1")
+            .then((res) => res.json())
             .then((json) => {
                 this.setState({
                     items: json,
@@ -38,18 +37,14 @@ class PostsList extends React.Component {
    
         return (
           
-            <div className = "Post-container">
-                <h1> Salut  </h1>  {
+            <div className = "App">
+                <h1> Comments </h1>  {
                     items.map((item) => ( 
-                    <>
-                        <ol key = { item.id } >
-                            Username: { item.UserId}, 
-                            PostId : {item.id}
-                            Post: { item.postText },
+                    <ol key = { item.id } >
+                        comment: { item.commentBody}, 
+                        Id : {item.id}
+                        Post: { item.postId } 
                         </ol>
-                        <ImgContainer img={item.image} />
-                    </>    
-                    
                     ))
                 }
             </div>
@@ -64,7 +59,7 @@ class PostsList extends React.Component {
  }
 
 
-export default PostsList;
+export default Comments;
 
 
    
