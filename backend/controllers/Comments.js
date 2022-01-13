@@ -9,10 +9,12 @@ exports.getComments = async (req, res) => {
 
 exports.postComment = async (req, res) => {
     const comment = req.body;
-    const username = req.user.username;
-    comment.username = username; 
-    await Comments.create(comment);
-    res.json(comment);
+
+    await Comments.create(comment)
+    .then(comment => {
+        return res.status(201).json(comment); 
+    })
+    .catch( error => {return res.status(500).json( {error: error, message: 'erreur'})});
 };
 
 

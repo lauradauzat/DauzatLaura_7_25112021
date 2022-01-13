@@ -46,11 +46,16 @@ exports.createPost = async ( req, res, next) => {
 
     let postContent = {
         postText: req.body.postText,
-        image: req.file.path
+        //pour le moment l'image provoque une erreur 
+        //image: req.file.path
     }
    
-    const post = await Posts.create(postContent);
-    res.status(200).send(post); 
+    const post = await Posts.create(postContent)
+    .then(post => {
+        return res.status(201).json(post); 
+    })
+    .catch( error => {return res.status(500).json( {error: error, message: 'erreur'})});
+    
     console.log('post : '+ post);
 }
 

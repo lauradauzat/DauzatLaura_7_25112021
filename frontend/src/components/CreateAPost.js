@@ -31,7 +31,7 @@ import axios from 'axios'
     render() {
         const { postText } = this.state
         return (
-            <div class="NewPost_container">
+            <div className="NewPost_container">
                 
                  <form onSubmit={this.submitHandler}>
                  <input placeholder="Say Something" name="postText" value={postText} onChange={this.changeHandler}></input>
