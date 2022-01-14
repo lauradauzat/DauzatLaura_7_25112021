@@ -44,12 +44,24 @@ exports.getOnePost = async (req, res) => {
 exports.createPost = async ( req, res, next) => {
     //console.log('req.body :' + req.body);
 
-    let postContent = {
-        postText: req.body.postText,
-        //pour le moment l'image provoque une erreur 
-        //image: req.file.path
+    let postContent = {}; 
+
+    if (req.file) {
+
+        postContent = {
+            postText: req.body.postText,
+            image: req.file.path
+        }
+
+    }  else {
+        
+        postContent = {
+            postText: req.body.postText,
+        }
+        
     }
-   
+
+
     const post = await Posts.create(postContent)
     .then(post => {
         return res.status(201).json(post); 
@@ -57,6 +69,7 @@ exports.createPost = async ( req, res, next) => {
     .catch( error => {return res.status(500).json( {error: error, message: 'erreur'})});
     
     console.log('post : '+ post);
+
 }
 
 

@@ -1,7 +1,13 @@
 
 import React from "react";
 import './App';
+import CommentairesContainer from "./CommentairesContainer";
 import ImgContainer from "./ImgContainer";
+
+
+
+
+
 
 class PostsList extends React.Component {
 
@@ -14,6 +20,9 @@ class PostsList extends React.Component {
             DataisLoaded: false
         };
     }
+
+
+
    
     // ComponentDidMount is used to
     // execute the code 
@@ -26,28 +35,39 @@ class PostsList extends React.Component {
                     items: json,
                     DataisLoaded: true
                 });
+               
             })
             
     }
+
+
     render() {
         
         
         const { DataisLoaded, items } = this.state;
         if (!DataisLoaded) return <div>
             <h1> Chargement en cours.... </h1> </div> ;
-   
+
         return (
           
             <div className = "Post-container">
-                <h1> Salut  </h1>  {
-                    items.map((item) => ( 
+                <h1> Salut  </h1>
+              
+                  {
+                    items.map((item) => (
+                      
                     <>
+                         <ImgContainer imageRef={item.image}></ImgContainer>
+                         
                         <ol key = { item.id } >
                             Username: { item.UserId}, 
-                            PostId : {item.id}
+                            PostId : {item.id}, 
+                            imageUrl: {item.image}
                             Post: { item.postText },
                         </ol>
-                        <ImgContainer img={item.image} />
+
+                        <CommentairesContainer postId={item.id}></CommentairesContainer>
+                        
                     </>    
                     
                     ))
@@ -67,10 +87,3 @@ class PostsList extends React.Component {
 export default PostsList;
 
 
-   
-
-
-
-
-
-   

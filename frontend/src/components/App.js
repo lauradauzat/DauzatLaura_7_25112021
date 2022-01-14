@@ -30,6 +30,9 @@ import SignIn from './SignIn'
 import CreateAPost from './CreateAPost'
 import Comments from './Comments'
 
+//prochaine etape : affichage des images 
+//ensuite commentaire à l'intérieur des posts
+
 function App() {
     return (
       <div>
@@ -39,7 +42,7 @@ function App() {
         <CreateAPost />
 
         <PostsList/>
-        <Comments />
+   
       </div>
       
     ) 
