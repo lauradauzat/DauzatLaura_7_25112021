@@ -3,6 +3,7 @@ import React from "react";
 import './App';
 import CommentairesContainer from "./CommentairesContainer";
 import ImgContainer from "./ImgContainer";
+import ProfileContainer from "./ProfileContainer";
 
 
 
@@ -58,8 +59,10 @@ class PostsList extends React.Component {
                       
                     <>
                          <ImgContainer imageRef={item.image}></ImgContainer>
+                         <ProfileContainer  userId={item.UserId}></ProfileContainer>
                          
                         <ol key = { item.id } >
+                           
                             Username: { item.UserId}, 
                             PostId : {item.id}, 
                             imageUrl: {item.image}

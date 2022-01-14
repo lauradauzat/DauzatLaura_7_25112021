@@ -1,5 +1,5 @@
 // import "./App.css";
-// import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+
 // import Home from "../pages/Home";
 // import CreatePost from "../pages/CreatePost";
 // import Post from "../pages/Post";
@@ -22,13 +22,15 @@
 // }
 
 // export default App;
-
+import React from "react";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import Banner from './Banner'
 import PostsList from './PostsList'
 import SignUp from './SignUp'
 import SignIn from './SignIn'
 import CreateAPost from './CreateAPost'
-import Comments from './Comments'
+import Profile  from '../pages/Profile'
+
 
 //prochaine etape : affichage des images 
 //ensuite commentaire à l'intérieur des posts
@@ -41,7 +43,13 @@ function App() {
         <SignIn />
         <CreateAPost />
 
-        <PostsList/>
+        <Router>
+          <Switch>
+            <Route exact path='/profile' component={Profile} />
+            <Route exact path='/' component={PostsList} />
+
+          </Switch>
+        </Router>
    
       </div>
       
