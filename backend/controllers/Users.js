@@ -32,12 +32,21 @@ exports.login =  async (req, res, next) => {
   
     const user = await Users.findOne({ where: {username: username} }); 
  
-    if (!user) res.json({ error: "User doesn't  exist"}); 
+    if (!user) res.status(401).json({ error: "User doesn't  exist"}); 
  
     bcrypt.compare(password, user.password).then((match) => {
       if (!match) res.json({error: "Wrong password"}); 
+
+      res.status(200).json({
+        userId: user.id,
+        token: jwt.sign(
+          { userId: user.id },
+          'RANDOM_TOKEN_SECRET',
+          { expiresIn: '24h' }
+        )
+      });
  
-      res.json ("You are logged in"); 
+      //res.json ("You are logged in"); 
          // a rajouter : va renvoyer userId et token dans le local storage du navigateur 
       
     }); 

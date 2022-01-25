@@ -6,6 +6,7 @@ const cors = require("cors");
 const postRoutes = require('./routes/Posts');
 const userRoutes = require('./routes/Users');
 const commentRoutes = require('./routes/Comments');
+const auth = require('./middlewares/auth'); 
 //const likeRoutes = require('./routes/Likes'); 
 //const signalRoutes = require('./routes/Signalements')
 const path = require('path');
