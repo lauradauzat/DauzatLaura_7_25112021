@@ -1,7 +1,9 @@
+
+import logo from "../images/icon-above-font.png"
 function Banner() {
     return (
         <div className="header">
-            <h1>Groupomania</h1>
+            <img src={logo} alt="logo"></img>
         </div>
          
          )

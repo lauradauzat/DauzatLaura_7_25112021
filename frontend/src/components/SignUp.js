@@ -35,7 +35,9 @@ import axios from 'axios'
         const { username, email, password} = this.state
         return (
             <div className="SignUp_container">
+                
                 <h1>Créer un nouveau compte</h1>
+                <img src={"src/images/icon-above-font.png"} alt='logo'></img>
                  <form onSubmit={this.submitHandler}>
                  <input placeholder="Nom" name="username" value={username} onChange={this.changeHandler}></input>
                 <input placeholder="Email" name="email" value={email} onChange={this.changeHandler}></input>

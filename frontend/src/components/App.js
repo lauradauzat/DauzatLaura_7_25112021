@@ -1,4 +1,4 @@
-// import "./App.css";
+import "./App.css";
 
 // import Home from "../pages/Home";
 // import CreatePost from "../pages/CreatePost";
@@ -30,6 +30,8 @@ import SignUp from './SignUp'
 import SignIn from './SignIn'
 import CreateAPost from './CreateAPost'
 import Profile  from '../pages/Profile'
+
+
 
 
 //prochaine etape : affichage des images 
