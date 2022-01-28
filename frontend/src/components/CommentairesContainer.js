@@ -7,6 +7,8 @@ function CommentairesContainer(props){
 
     const [comments, setComments] = useState([])
     const fetchUrl = 'http://localhost:3001/comments/'+ props.postId; 
+    const userConnected = localStorage.getItem('id'); 
+    
 
     useEffect(() => {
         axios.get(fetchUrl).then(res => {
@@ -21,7 +23,12 @@ function CommentairesContainer(props){
 
     return (
         <>
-        <input placeholder="commentaires"></input>
+
+        <form>
+            <input placeholder="commentaires"></input>
+            <button> Envoyer un commentaire </button>
+        </form>
+       
     
              <ul>
                  {comments.map( comment => (

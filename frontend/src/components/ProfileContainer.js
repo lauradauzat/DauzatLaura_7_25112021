@@ -27,13 +27,14 @@ function ProfileContainer(props){
             )
         } else {
 
-            const fetchProfilePage = '/profile/'+profile.userId ; 
+            const fetchProfilePage = '/profile/'+profile.id ; 
+            console.log(profile); 
 
             return (
                 <>
             
                     <p> Post from : {profile.username}</p>
-                    <button onClick={() => {history.push('/profile')}}> Go to profile page </button>
+                    <button onClick={() => {history.push(fetchProfilePage)}}> Go to profile page </button>
                 </>
             )
 

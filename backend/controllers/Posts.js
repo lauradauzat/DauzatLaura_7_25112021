@@ -50,6 +50,7 @@ exports.createPost = async ( req, res, next) => {
 
         postContent = {
             postText: req.body.postText,
+            UserId: req.body.UserId,
             image: req.file.path
         }
 
@@ -57,6 +58,7 @@ exports.createPost = async ( req, res, next) => {
         
         postContent = {
             postText: req.body.postText,
+            UserId: req.body.UserId,
         }
         
     }

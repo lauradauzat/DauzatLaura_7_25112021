@@ -1,14 +1,18 @@
 
 import React, { Component } from 'react'
 import axios from 'axios'
+const userId = localStorage.getItem('id');
 
  class CreateAPost extends Component {
+
+   
 
     constructor(props) {
         super(props)
     
         this.state = {
-            postText: '',    
+            postText: '',  
+            UserId: userId, 
         }
     }
 

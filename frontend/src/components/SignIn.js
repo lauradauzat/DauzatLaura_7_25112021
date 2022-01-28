@@ -2,6 +2,11 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
+function populateStorage(id, token) {
+    localStorage.setItem('id', id);
+    localStorage.setItem('token', token);
+  }
+
  class SignIn extends Component {
 
     constructor(props) {
@@ -18,12 +23,15 @@ import axios from 'axios'
         this.setState({[e.target.name]: e.target.value})
     }
 
+ 
+
     submitHandler = e => {
         e.preventDefault()
-        console.log(this.state)
+        console.log(this.state); 
         axios.post("http://localhost:3001/auth/login", this.state)
             .then(response => {
                 console.log(response, 'you are logged in'); 
+                populateStorage(response.data.userId,response.data.token); 
             })
             .catch( error => {
                 console.log(error);

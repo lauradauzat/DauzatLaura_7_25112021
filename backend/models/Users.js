@@ -24,6 +24,10 @@ module.exports = (sequelize, DataTypes) => {
         //if you delete a User, delete the Posts related to this users 
         onDelete: "cascade", 
       });
+      Users.hasMany(models.Comments, {
+        //if you delete a User, delete the Posts related to this users 
+        onDelete: "cascade", 
+      });
     }
     return Users;
   };
