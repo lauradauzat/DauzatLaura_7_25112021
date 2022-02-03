@@ -6,6 +6,7 @@ import './App';
 import CommentairesContainer from "./CommentairesContainer";
 import ImgContainer from "./ImgContainer";
 import ProfileContainer from "./ProfileContainer";
+import TxtContainer from "./TxtContainer"; 
 
 
 // class PostsList extends React.Component {
@@ -119,28 +120,38 @@ function PostsList(props) {
 
     return (
         <>
-        <p>Coucou {user.username}</p>
+        <p>Bonjour, {user.username}</p>
+        <div className="feed-container">
         {
+            
                     posts.map((post) => (
                       
                     <>
+
+                    <div className="postcard">
+
+                        <ProfileContainer  userId={post.UserId}></ProfileContainer>
+                         <TxtContainer text={post.postText}></TxtContainer>
                          <ImgContainer imageRef={post.image}></ImgContainer>
-                         <ProfileContainer  userId={post.UserId}></ProfileContainer>
+                        
                          
-                        <ol key = { post.id } >
+                        {/* <ol key = { post.id } >
                            
                             Username: { post.UserId}, 
                             PostId : {post.id}, 
                             imageUrl: {post.image}
                             Post: { post.postText },
-                        </ol>
+                        </ol> */}
 
                         <CommentairesContainer postId={post.id}></CommentairesContainer>
+                    </div>
+                         
                         
                     </>    
                     
                     ))
         }
+        </div>
 
      
         </>

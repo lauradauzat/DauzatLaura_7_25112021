@@ -10,3 +10,54 @@ body {
 .header img {
   width: 305px; 
 }
+
+
+// SignIn 
+
+.SignIn_container {
+  display: flex;
+  justify-content: center;
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    input {
+      outline: none; 
+      border: 0; 
+      border-bottom: $grey 1px solid;
+    } 
+    button {
+      background-color: rgb(223, 43, 43);
+      color: whitesmoke;
+      height: 30px;
+      border-radius: 5px; 
+      box-shadow:rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;;
+    }
+    * {
+      margin: 5px 0; 
+    }
+  
+  }
+ 
+
+} 
+
+
+
+
+// Feed 
+
+// PostList 
+
+.feed-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.postcard {
+  width: 80%;
+  border-radius: 5px;
+  background-color: whitesmoke;
+  margin: 10px 0;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}

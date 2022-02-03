@@ -7,13 +7,13 @@ import PostsList from '../components/PostsList'
 import Login from './Login'
 
 
+
 function Feed() {
 
 
     if (localStorage.getItem("token") === null) {
         return (
             <div>
-                 <p> Sorry, you are not logged in</p>
                  <Login />
             </div>
            

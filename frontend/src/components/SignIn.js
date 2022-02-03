@@ -32,6 +32,7 @@ function populateStorage(id, token) {
             .then(response => {
                 console.log(response, 'you are logged in'); 
                 populateStorage(response.data.userId,response.data.token); 
+                window.location.reload();
             })
             .catch( error => {
                 console.log(error);
@@ -42,12 +43,12 @@ function populateStorage(id, token) {
         const { username, password} = this.state
         return (
             <div className="SignIn_container">
-                <h1>J'ai déjà un compte</h1>
+
                  <form onSubmit={this.submitHandler}>
-                 <input placeholder="Nom" name="username" value={username} onChange={this.changeHandler}></input>
-                <input placeholder="Mot de passe" name="password" value={password} onChange={this.changeHandler}></input>
-                
-                <button type='submit'>Se connecter</button>
+                    <input placeholder="Nom" name="username" value={username} onChange={this.changeHandler}></input>
+                    <input placeholder="Mot de passe" name="password" value={password} onChange={this.changeHandler}></input>
+                    
+                    <button type='submit'>Se connecter</button>
                  </form>
 
             </div>

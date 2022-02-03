@@ -53,7 +53,8 @@ import { useParams } from 'react-router-dom';
 // }
   
 const Profile = () => {
-  const { id }: { id: string} = useParams(); 
+  console.log('coucou profile page');
+  const { id }  = useParams(); 
   let history = useHistory(); 
   const [profile, setProfile] = useState([]); 
   const fetchUrl = 'http://localhost:3001/auth/'+id; 

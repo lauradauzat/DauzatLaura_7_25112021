@@ -7,4 +7,65 @@ body {
 .header img {
   width: 305px;
 }
+
+.SignIn_container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.SignIn_container form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 80%;
+}
+
+.SignIn_container form input {
+  outline: none;
+  border: 0;
+  border-bottom: #1d1d1d 1px solid;
+}
+
+.SignIn_container form button {
+  background-color: #df2b2b;
+  color: whitesmoke;
+  height: 30px;
+  border-radius: 5px;
+  -webkit-box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+          box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.SignIn_container form * {
+  margin: 5px 0;
+}
+
+.feed-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.postcard {
+  width: 80%;
+  border-radius: 5px;
+  background-color: whitesmoke;
+  margin: 10px 0;
+  -webkit-box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+          box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
 /*# sourceMappingURL=App.css.map */

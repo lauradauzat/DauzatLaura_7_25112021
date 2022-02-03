@@ -11,8 +11,10 @@ function Login() {
         return (
             <div className="login">
                 <Banner />
-                <SignUp />
                 <SignIn />
+                <button> Créer un nouveau compte</button>
+                <SignUp />
+                
             </div>
              
              )
