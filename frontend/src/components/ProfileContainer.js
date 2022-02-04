@@ -32,9 +32,10 @@ function ProfileContainer(props){
 
             return (
                 <>
-            
-                    <p> Post from : {profile.username}</p>
-                    <button onClick={() => {history.push(fetchProfilePage)}}> Go to profile page </button>
+                <div className="authorName-container" >
+                    <button className="authorName" onClick={() => {history.push(fetchProfilePage)}}> {profile.username}</button>
+                </div>
+                   
                 </>
             )
 

@@ -1,15 +1,18 @@
 
 
 
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 import CreateAPost  from '../components/CreateAPost'
 import PostsList from '../components/PostsList'
 import Login from './Login'
 
 
 
-function Feed() {
 
+function Feed() {
+   
+    const userId = localStorage.getItem('id');
+    const [send, setSend] = useState({postText: '',  UserId: userId,});
 
     if (localStorage.getItem("token") === null) {
         return (
@@ -23,7 +26,8 @@ function Feed() {
           return (
             <div className="feed">
             <Login />
-            <CreateAPost />
+            <CreateAPost send={send} setSend={setSend} userId={userId} />
+            
             <PostsList />
             </div>
           )

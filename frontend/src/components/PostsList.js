@@ -120,18 +120,21 @@ function PostsList(props) {
 
     return (
         <>
-        <p>Bonjour, {user.username}</p>
+       
         <div className="feed-container">
         {
             
-                    posts.map((post) => (
+                    posts.slice(0).reverse().map((post) => (
                       
                     <>
 
                     <div className="postcard">
-
+                        
+                        <div className="up-container">
                         <ProfileContainer  userId={post.UserId}></ProfileContainer>
                          <TxtContainer text={post.postText}></TxtContainer>
+                        </div>
+                        
                          <ImgContainer imageRef={post.image}></ImgContainer>
                         
                          

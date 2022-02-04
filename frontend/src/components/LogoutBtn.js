@@ -12,8 +12,8 @@ function LogoutBtn() {
     }
   
     return (
-        <div className="logOut">
-            <button onClick={logOutandReload}>Me déconnecter</button>
+        <div >
+            <button type="button" className='logOut' onClick={logOutandReload}>Me déconnecter</button>
         </div>
          
          )

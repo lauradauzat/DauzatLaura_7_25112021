@@ -4,13 +4,58 @@ body {
   text-align: center;
   font-family: "Lato", sans-serif;
   color: $grey;
-
 }
+
+
+//BannerTop
 
 .header img {
   width: 305px; 
 }
 
+.bannerSmall img {
+  width: 100px;
+}
+
+.logout {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: rgba(240, 46, 170, 0.4) 0px 5px, rgba(240, 85, 46, 0.842) 0px 10px, rgba(204, 103, 21, 0.752) 0px 15px, rgba(234, 161, 27, 0.1) 0px 20px, rgba(253, 70, 38, 0.05) 0px 25px;
+  margin-bottom: 40px;
+  color:rgb(214, 105, 78);
+
+
+}
+
+button.logOut {
+  border: rgb(255, 97, 61) solid 3px;
+  background-color: none;
+  outline: none;
+  margin-right: 10px;
+}
+
+//CreateAPost 
+
+.NewPost_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  form {
+    width: 80%;
+  }
+  textarea, button {
+    width: 100%;
+  }
+
+  textarea {
+    height: 100px;
+    position: relative;
+    font-family: 'Lato';
+  }
+  
+  
+}
 
 // SignIn 
 
@@ -55,9 +100,63 @@ body {
   align-items: center;
 }
 .postcard {
-  width: 80%;
+  .up-container {
+    display: flex;
+    width: 90%;
+    align-items:center;
+  }
+  display: flex;
+
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
   border-radius: 5px;
   background-color: whitesmoke;
   margin: 10px 0;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  .txt-container {
+    background-color: white;
+    width: 90%; 
+    border-radius: 5px;
+    margin: 10px;
+  }
+
+  
+
+
+  .com-container {
+    display: flex;
+    width: 90%;
+
+
+
+ 
+    textarea {
+      height:50px; 
+      font-family: 'Lato';
+      width:100%;
+    }
+    * {
+      margin: 10px 0;
+    }
+  }
+
+  .commentsSection {
+    width: 90%; 
+    margin-bottom: 10px;
+  }
+
+  .com {
+      display: flex;
+      margin: 10px 0;
+      border-radius: 5px;
+
+      .commentText {
+        width: 100%;
+        border: solid grey 1px; 
+        margin-left: 10px
+      }
+
+  }
+  
 }

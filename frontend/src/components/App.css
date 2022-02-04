@@ -8,6 +8,60 @@ body {
   width: 305px;
 }
 
+.bannerSmall img {
+  width: 100px;
+}
+
+.logout {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-shadow: rgba(240, 46, 170, 0.4) 0px 5px, rgba(240, 85, 46, 0.842) 0px 10px, rgba(204, 103, 21, 0.752) 0px 15px, rgba(234, 161, 27, 0.1) 0px 20px, rgba(253, 70, 38, 0.05) 0px 25px;
+          box-shadow: rgba(240, 46, 170, 0.4) 0px 5px, rgba(240, 85, 46, 0.842) 0px 10px, rgba(204, 103, 21, 0.752) 0px 15px, rgba(234, 161, 27, 0.1) 0px 20px, rgba(253, 70, 38, 0.05) 0px 25px;
+  margin-bottom: 40px;
+  color: #d6694e;
+}
+
+button.logOut {
+  border: #ff613d solid 3px;
+  background-color: none;
+  outline: none;
+  margin-right: 10px;
+}
+
+.NewPost_container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.NewPost_container form {
+  width: 80%;
+}
+
+.NewPost_container textarea, .NewPost_container button {
+  width: 100%;
+}
+
+.NewPost_container textarea {
+  height: 100px;
+  position: relative;
+  font-family: 'Lato';
+}
+
 .SignIn_container {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -61,11 +115,74 @@ body {
 }
 
 .postcard {
-  width: 80%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 90%;
   border-radius: 5px;
   background-color: whitesmoke;
   margin: 10px 0;
   -webkit-box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
           box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.postcard .up-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 90%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.postcard .txt-container {
+  background-color: white;
+  width: 90%;
+  border-radius: 5px;
+  margin: 10px;
+}
+
+.postcard .com-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 90%;
+}
+
+.postcard .com-container textarea {
+  height: 50px;
+  font-family: 'Lato';
+  width: 100%;
+}
+
+.postcard .com-container * {
+  margin: 10px 0;
+}
+
+.postcard .commentsSection {
+  width: 90%;
+  margin-bottom: 10px;
+}
+
+.postcard .com {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 10px 0;
+  border-radius: 5px;
+}
+
+.postcard .com .commentText {
+  width: 100%;
+  border: solid grey 1px;
+  margin-left: 10px;
 }
 /*# sourceMappingURL=App.css.map */

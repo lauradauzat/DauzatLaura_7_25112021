@@ -9,7 +9,9 @@ function TxtContainer(props){
             return (
                 <>
             
-                   <p>{props.text}</p>
+                  <div className="txt-container">
+                     <p>{props.text}</p>
+                 </div> 
                 </>
             )
 
