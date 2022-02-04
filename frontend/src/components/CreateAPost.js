@@ -54,16 +54,18 @@ import axios from 'axios'
 //     }
 // }
 
-function CreateAPost ({send, setSend, userId})  {
-
+function CreateAPost ()  {
+    const userId = localStorage.getItem('id');
     const [post, setPost] = useState("");
+    const [images, setImage] = useState(null);
+    const [send, setSend] = useState({postText: post,  UserId: userId, image: images});
 
     
     
     
     const changeHandler = e => {
         setPost(e.target.value); 
-        setSend({postText : post,  UserId: userId });
+        setSend({postText : post,  UserId: userId, image: images });
   
     }
 
@@ -71,7 +73,18 @@ function CreateAPost ({send, setSend, userId})  {
         e.preventDefault()
         console.log(post)
         setSend()
-        axios.post("http://localhost:3001/posts", send)
+        const dataArray = new FormData();
+        dataArray.append('postText', post); 
+        dataArray.append('UserId', userId); 
+        dataArray.append('image', images);
+
+        
+        console.log( 'send = ' + dataArray);
+        axios.post("http://localhost:3001/posts",  dataArray, {
+            headers: {
+              "Content-Type": "multipart/form-data"
+            }
+          })
             .then(response => {
                 console.log(response, 'posted'); 
             })
@@ -79,17 +92,30 @@ function CreateAPost ({send, setSend, userId})  {
                 console.log(error);
             })
         
-        window.location.reload();
+        //window.location.reload();
      }
 
+
+    const handleFile = e => {
+        console.log(e.target.files, "$$$$$$");
+        console.log(e.target.files[0], "$$$$$$");
+        setImage(e.target.files[0])
+        setSend({postText : post,  UserId: userId, image: images });
+        console.log(send);
+    }
     
    
     
         return (
             <div className="NewPost_container">
                 
-                 <form onSubmit={submitHandler}>
+                 <form  onSubmit={submitHandler} encType="form-multipart">
                  <textarea placeholder="Say Something" name="postText" value={post} onChange={changeHandler}></textarea>
+                 <div className='file-form'>
+                     <label>Choisir une image</label>
+                     <input type="file" name="file" onChange={handleFile}></input>
+
+                 </div>
        
                 
                 <button type='submit'>Publier</button>

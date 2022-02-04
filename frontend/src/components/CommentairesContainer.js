@@ -37,7 +37,7 @@ function CommentairesContainer(props){
 
     }
 
-
+  
     useEffect(() => {
         axios.get(fetchUrl).then(res => {
             console.log(res)
@@ -53,7 +53,9 @@ function CommentairesContainer(props){
         <>
           
         <form onSubmit={postComment} className="com-container">
-            <textarea placeholder="commentaires" value={newCommentText} onChange={ (e) => { setNewCommentText(e.target.value)}} > </textarea>
+            <textarea placeholder="commentaires" value={newCommentText} onChange={ (e) => {  setNewCommentText(e.target.value); setNewComment({commentBody : e.target.value, 
+            PostId: props.postId, 
+            UserId: userConnected}) }} > </textarea>
             <button> Envoyer un commentaire </button>
         </form>
 

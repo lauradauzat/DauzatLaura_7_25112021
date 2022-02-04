@@ -11,8 +11,9 @@ import Login from './Login'
 
 function Feed() {
    
-    const userId = localStorage.getItem('id');
-    const [send, setSend] = useState({postText: '',  UserId: userId,});
+    // const userId = localStorage.getItem('id');
+    // const [send, setSend] = useState({postText: '',  UserId: userId, image: null});
+    // send={send} setSend={setSend} userId={userId} 
 
     if (localStorage.getItem("token") === null) {
         return (
@@ -26,7 +27,7 @@ function Feed() {
           return (
             <div className="feed">
             <Login />
-            <CreateAPost send={send} setSend={setSend} userId={userId} />
+            <CreateAPost />
             
             <PostsList />
             </div>
