@@ -8,6 +8,7 @@
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.24.0",
+    "babel-install": "^2.1.0",
     "bootstrap": "^4.0.0",
     "formik": "^2.2.9",
     "history": "^4.10.1",
@@ -45,5 +46,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/preset-react": "^7.16.7",
+    "babel-plugin-jsx-control-statements": "^4.1.2"
   }
 }

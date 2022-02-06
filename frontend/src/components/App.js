@@ -1,31 +1,24 @@
 import "./App.css";
 import React from "react";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
-import Profile  from '../pages/Profile'
+import Profile  from '../pages/Profile';
 import Login from "../pages/Login";
-import Feed from "../pages/Feed"
+import Feed from "../pages/Feed";
 import { useLocation } from "react-router-dom";
 import NewAccount from "../pages/NewAccount";
 
 const routes = [
-  {
-    path: "/",
-    component: Feed
-  },
+
+
   {
     path: "/profile/:id",
     component: Profile
+  }, 
+  {
+    path: "/",
+    component: Feed
   }
-  // , 
-  // {
-  //   path: "/login", 
-  //   component: Login
-  // }, 
-  // {
-  //   path: "/newAccount", 
-  //   component: NewAccount
-  // }
-
+ 
 
 
 ];
