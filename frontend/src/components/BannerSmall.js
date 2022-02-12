@@ -1,8 +1,16 @@
 import logo from "../images/icon-above-font.png"
+import React from "react";
+import { useHistory } from "react-router-dom"; 
+
+
 function BannerSmall() {
+
+    const backToFeed = "/";
+    let history = useHistory(); 
+
     return (
         <div className="bannerSmall">
-            <img src={logo} alt="logo"></img>
+            <img  onClick={() => {history.push(backToFeed)}}  src={logo} alt="logo"></img>
         </div>
          
          )

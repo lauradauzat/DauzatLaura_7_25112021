@@ -34,6 +34,7 @@ function ProfileContainer(props){
                 <>
                 <div className="authorName-container" >
                     <button className="authorName" onClick={() => {history.push(fetchProfilePage)}}> {profile.username}</button>
+                    
                 </div>
                    
                 </>

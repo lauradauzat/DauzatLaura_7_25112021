@@ -90,33 +90,39 @@ import TxtContainer from "./TxtContainer";
 function PostsList(props) {
 
     let history = useHistory(); 
-    const [posts, getPosts] = useState([])
-    const [user, getUser] = useState([])
-    const userConnected = localStorage.getItem('id'); 
+    const [readOnly, changeReadOnly] = useState("readonly"); 
 
-    const url =  "http://localhost:3001/posts"; 
-    const userIdUrl = 'http://localhost:3001/auth/'+userConnected; 
+    const deletePost = (e) => {
+        axios.delete(`http://localhost:3001/posts/${e}`)  
+        .then(response => {
+            console.log(response, 'deleted');    
+        })
+        .catch( error => {
+            console.log(error);
+        })
+    }
 
+
+    const modifyPost = (e, readOnly) => {
+        console.log('goes into modify ');
+        console.log(readOnly);
+        
+        
+        changeReadOnly(undefined);
+        console.log(readOnly);
+
+        // axios.put(`http://localhost:3001/posts/${e}`)  
+        // .then(response => {
+        //     console.log(response, 'modified');    
+        // })
+        // .catch( error => {
+        //     console.log(error);
+        // })
+    }
+
+    console.log('usercon' +props.userConnected); 
+   
     
-    
-    //get the posts 
-    useEffect(() => {
-        axios.get(url).then(res => {
-            getPosts(res.data)
-        })
-        .catch(err => {
-            console.log(err)
-        })
-    }, [])
-
-    useEffect(() => {
-        axios.get(userIdUrl).then(res => {
-            getUser(res.data)
-        })
-        .catch(err => {
-            console.log(err)
-        })
-    }, [])
 
     return (
         <>
@@ -124,7 +130,7 @@ function PostsList(props) {
         <div className="feed-container">
         {
             
-                    posts.slice(0).reverse().map((post) => (
+                    props.posts.slice(0).reverse().map((post) => (
                       
                     <>
 
@@ -132,10 +138,12 @@ function PostsList(props) {
                         
                         <div className="up-container">
                         <ProfileContainer  userId={post.UserId}></ProfileContainer>
-                         <TxtContainer text={post.postText}></TxtContainer>
+                         <TxtContainer text={post.postText} readOnly={readOnly}></TxtContainer>
                         </div>
                         
                          <ImgContainer imageRef={post.image}></ImgContainer>
+                        
+          
                         
                          
                         {/* <ol key = { post.id } >
@@ -147,6 +155,19 @@ function PostsList(props) {
                         </ol> */}
 
                         <CommentairesContainer postId={post.id}></CommentairesContainer>
+                        <div>
+                 
+
+                        {(function() {
+                                if (props.userConnected == post.UserId) {
+                                    return    <div><button onClick={() => { deletePost(post.id)}}> Supprimer</button> <button  onClick={() => { modifyPost(post.id, readOnly)}}> Modifier </button></div>
+                                } 
+                                })()}
+
+                        </div>
+                  
+                        
+                  
                     </div>
                          
                         

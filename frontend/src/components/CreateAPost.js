@@ -54,12 +54,12 @@ import axios from 'axios'
 //     }
 // }
 
-function CreateAPost ()  {
+function CreateAPost (props)  {
     const userId = localStorage.getItem('id');
     const [post, setPost] = useState("");
     const [images, setImage] = useState(null);
     const [send, setSend] = useState({postText: post,  UserId: userId, image: images});
-
+    const postArray = props.posts;
     
     
     
@@ -69,7 +69,7 @@ function CreateAPost ()  {
   
     }
 
-    const submitHandler = e => {
+    const submitHandler = (e, postArray)  => {
         e.preventDefault()
         console.log(post)
         setSend()
@@ -87,6 +87,8 @@ function CreateAPost ()  {
           })
             .then(response => {
                 console.log(response, 'posted'); 
+            
+                
             })
             .catch( error => {
                 console.log(error);

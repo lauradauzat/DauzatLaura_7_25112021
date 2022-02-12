@@ -11,6 +11,32 @@ function CommentairesContainer(props){
     const userConnected = localStorage.getItem('id'); 
     const postCommentUrl = 'http://localhost:3001/comments' ;
 
+//deleteComment
+    const deletePost = (e) => {
+        axios.delete(`http://localhost:3001/comments/${e}`)  
+        .then(response => {
+            console.log(response, 'deleted');    
+        })
+        .catch( error => {
+            console.log(error);
+        })
+    }
+
+
+    const modifyPost = (e) => {
+        console.log('goes into modify ');
+
+
+        // axios.put(`http://localhost:3001/comments/${e}`)  
+        // .then(response => {
+        //     console.log(response, 'modified');    
+        // })
+        // .catch( error => {
+        //     console.log(error);
+        // })
+    }
+
+
 
     const [newComment, setNewComment] = useState({
         'commentBody': "", 
@@ -65,6 +91,12 @@ function CommentairesContainer(props){
                      <div className="com" key={comment.id}>
                          <ProfileContainer userId={comment.UserId}/>
                          <div className="commentText">{comment.commentBody}</div>
+                         {(function() {
+                                if (userConnected == comment.UserId) {
+                                    return    <div><button onClick={() => { deletePost(comment.id)}}> Supprimer</button> <button  onClick={() => { modifyPost(comment.id)}}> Modifier </button></div>
+                                } 
+                                })()}
+
                      </div>
              ))}
 

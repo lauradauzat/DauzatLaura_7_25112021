@@ -9,9 +9,9 @@ function TxtContainer(props){
             return (
                 <>
             
-                  <div className="txt-container">
-                     <p>{props.text}</p>
-                 </div> 
+                  <input className="txt-container" value={props.text} readonly={props.readOnly} >
+                     {/* <p>{}</p> */}
+                 </input> 
                 </>
             )
 
