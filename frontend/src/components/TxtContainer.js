@@ -4,14 +4,70 @@ import { useHistory } from "react-router-dom";
 
 function TxtContainer(props){
 
- 
+    const [text, setText] = useState(props.text); 
+    const [json, setJson] = useState([{"postText": text}]);
+    
+
+    const  changeHandler = e => {
+        setText(e.target.value)
+        console.log(text);
+        setJson({"postText": text});
+    }
+
+    const sendModifiedText = e => {
+        e.preventDefault();
+    
+        console.log(json); 
+        // const dataArray = new FormData();
+        // dataArray.append(json); 
+        axios.put("http://localhost:3001/posts/"+props.postId,  json)
+        //  {
+        //     // headers: {
+        //     //   "Content-Type": "multipart/form-data"
+        //     // }
+        //   })
+            .then(response => {
+                console.log(response, 'posted'); 
+            
+                
+            })
+            .catch( error => {
+                console.log(error);
+            })
+      }
+    
+  
 
             return (
                 <>
-            
-                  <input className="txt-container" value={props.text} readonly={props.readOnly} >
-                     {/* <p>{}</p> */}
-                 </input> 
+            {
+                            (function() {
+  
+              if (props.displayInputs === true ) {
+                
+                return    <div> 
+                    <form onSubmit={sendModifiedText}>
+                      <input className="txt-container"  placeholder={props.text} name="postText" value={text} onChange={changeHandler}></input>
+     
+                      <button type='submit'>Confirmer les modifications</button>
+                    </form>
+                  </div>
+              } 
+              else if (props.displayInputs === false)
+              {
+           
+                return (
+                  <>
+              
+                    <p className="txt-container"  >{props.text} 
+                   </p> 
+                  </>
+              )
+  
+              }
+            })()
+            }
+               
                 </>
             )
 

@@ -90,7 +90,8 @@ import TxtContainer from "./TxtContainer";
 function PostsList(props) {
 
     let history = useHistory(); 
-    const [readOnly, changeReadOnly] = useState("readonly"); 
+
+    const [displayInputs, setDisplay] = useState(false); 
 
     const deletePost = (e) => {
         axios.delete(`http://localhost:3001/posts/${e}`)  
@@ -103,13 +104,10 @@ function PostsList(props) {
     }
 
 
-    const modifyPost = (e, readOnly) => {
+    const modifyDisplay = (e) => {
         console.log('goes into modify ');
-        console.log(readOnly);
-        
-        
-        changeReadOnly(undefined);
-        console.log(readOnly);
+        setDisplay(true); 
+        console.log(displayInputs);
 
         // axios.put(`http://localhost:3001/posts/${e}`)  
         // .then(response => {
@@ -138,7 +136,7 @@ function PostsList(props) {
                         
                         <div className="up-container">
                         <ProfileContainer  userId={post.UserId}></ProfileContainer>
-                         <TxtContainer text={post.postText} readOnly={readOnly}></TxtContainer>
+                         <TxtContainer postId={post.id} text={post.postText} displayInputs={displayInputs} ></TxtContainer>
                         </div>
                         
                          <ImgContainer imageRef={post.image}></ImgContainer>
@@ -160,7 +158,7 @@ function PostsList(props) {
 
                         {(function() {
                                 if (props.userConnected == post.UserId) {
-                                    return    <div><button onClick={() => { deletePost(post.id)}}> Supprimer</button> <button  onClick={() => { modifyPost(post.id, readOnly)}}> Modifier </button></div>
+                                    return    <div><button onClick={() => { deletePost(post.id)}}> Supprimer</button> <button  onClick={() => { modifyDisplay()}}> Modifier </button></div>
                                 } 
                                 })()}
 
