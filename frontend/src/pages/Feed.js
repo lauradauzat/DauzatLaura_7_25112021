@@ -12,12 +12,13 @@ import Login from './Login'
 
 function Feed() {
 
-    const [posts, getPosts] = useState([])
-    const [user, getUser] = useState([])
+    const [posts, setPosts] = useState([])
+    const [user, setUser] = useState([])
     const userConnected = localStorage.getItem('id'); 
 
     const url =  "http://localhost:3001/posts"; 
     const userIdUrl = 'http://localhost:3001/auth/'+userConnected; 
+    const access_token = localStorage.getItem('token'); 
 
 
 
@@ -25,8 +26,12 @@ function Feed() {
 
         //get the posts 
         useEffect(() => {
-            axios.get(url).then(res => {
-                getPosts(res.data)
+            axios.get(url, {
+                headers: {
+                    'Authorization': `token ${access_token}`
+                }
+            }).then(res => {
+                setPosts(res.data)
             })
             .catch(err => {
                 console.log(err)
@@ -34,8 +39,12 @@ function Feed() {
         }, [])
     
         useEffect(() => {
-            axios.get(userIdUrl).then(res => {
-                getUser(res.data)
+            axios.get(userIdUrl, {
+                headers: {
+                    'Authorization': `token ${access_token}`
+                }
+            }).then(res => {
+                setUser(res.data)
             })
             .catch(err => {
                 console.log(err)
@@ -59,7 +68,7 @@ function Feed() {
           return (
             <div className="feed">
             <Login />
-            <CreateAPost posts={posts}/>
+            <CreateAPost posts={posts} setPosts={setPosts}/>
             
             <PostsList posts={posts} userConnected={userConnected} />
             </div>

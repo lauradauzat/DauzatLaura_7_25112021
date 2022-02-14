@@ -60,7 +60,7 @@ function CreateAPost (props)  {
     const [images, setImage] = useState(null);
     const [send, setSend] = useState({postText: post,  UserId: userId, image: images});
     const postArray = props.posts;
-    
+    const setPosts = props.setPosts;
     
     
     const changeHandler = e => {
@@ -69,10 +69,11 @@ function CreateAPost (props)  {
   
     }
 
-    const submitHandler = (e, postArray)  => {
+    const submitHandler = (e)  => {
         e.preventDefault()
         console.log(post)
         setSend()
+        const access_token = localStorage.getItem('token'); 
         const dataArray = new FormData();
         dataArray.append('postText', post); 
         dataArray.append('UserId', userId); 
@@ -82,12 +83,15 @@ function CreateAPost (props)  {
         console.log( 'send = ' + dataArray);
         axios.post("http://localhost:3001/posts",  dataArray, {
             headers: {
-              "Content-Type": "multipart/form-data"
+              "Content-Type": "multipart/form-data", 
+              'Authorization': `token ${access_token}`
             }
           })
             .then(response => {
                 console.log(response, 'posted'); 
-            
+                let tmpPosts = [...postArray];
+                tmpPosts.push(response.data); 
+                setPosts(tmpPosts); 
                 
             })
             .catch( error => {
@@ -112,7 +116,7 @@ function CreateAPost (props)  {
             <div className="NewPost_container">
                 
                  <form  onSubmit={submitHandler} encType="form-multipart">
-                 <textarea placeholder="Say Something" name="postText" value={post} onChange={changeHandler}></textarea>
+                 <textarea placeholder="Say Something" name="postText" onChange={changeHandler}>{post}</textarea>
                  <div className='file-form'>
                      <label>Choisir une image</label>
                      <input type="file" name="file" onChange={handleFile}></input>

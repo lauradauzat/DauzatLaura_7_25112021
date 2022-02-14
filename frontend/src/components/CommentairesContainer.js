@@ -10,12 +10,21 @@ function CommentairesContainer(props){
     const fetchUrl = 'http://localhost:3001/comments/'+ props.postId; 
     const userConnected = localStorage.getItem('id'); 
     const postCommentUrl = 'http://localhost:3001/comments' ;
+    const access_token = localStorage.getItem('token'); 
 
 //deleteComment
     const deletePost = (e) => {
-        axios.delete(`http://localhost:3001/comments/${e}`)  
-        .then(response => {
-            console.log(response, 'deleted');    
+        axios.delete(`http://localhost:3001/comments/${e}`, {
+            headers: {
+                'Authorization': `token ${access_token}`
+            }
+        })  
+        .then(res => {
+            console.log(res, 'deleted');    
+           // let tmpComments = res.data; 
+           // !! to fix : majke res.data envoyer l'id du comment ? 
+            
+           // setComments(tmpComments); 
         })
         .catch( error => {
             console.log(error);
@@ -53,8 +62,15 @@ function CommentairesContainer(props){
             UserId: userConnected})
         console.log(newComment); 
         
-        axios.post(postCommentUrl, newComment).then(res => {
-            console.log(res)
+        axios.post(postCommentUrl, newComment, {
+            headers: {
+                'Authorization': `token ${access_token}`
+            }
+        }).then(res => {
+            console.log(res); 
+            let tmpComments = [...comments];
+            tmpComments.push(res.data); 
+            setComments(tmpComments); 
         })
         .catch(err => {
             console.log(err)
@@ -65,7 +81,11 @@ function CommentairesContainer(props){
 
   
     useEffect(() => {
-        axios.get(fetchUrl).then(res => {
+        axios.get(fetchUrl, {
+            headers: {
+                'Authorization': `token ${access_token}`
+            }
+        }).then(res => {
             console.log(res)
             setComments(res.data)
         })

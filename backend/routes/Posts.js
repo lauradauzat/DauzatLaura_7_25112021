@@ -4,18 +4,19 @@ const router = express.Router();
 
 const multer = require('../middlewares/multer');
 const postCtrl = require ('../controllers/Posts'); 
+const auth = require('../middlewares/auth')
 
-router.get('/', postCtrl.getAllPosts);
-router.get("/byId/:id", postCtrl.getOnePost); 
-router.post('/', multer, postCtrl.createPost); 
-router.put('/:id', postCtrl.modifyPost); 
-router.delete('/:id', postCtrl.deletePost); 
+router.get('/', auth, postCtrl.getAllPosts);
+router.get("/byId/:id", auth,postCtrl.getOnePost); 
+router.post('/', multer,auth, postCtrl.createPost); 
+router.put('/:id', auth, postCtrl.modifyPost); 
+router.delete('/:id', auth, postCtrl.deletePost); 
 
-router.post('/likes', postCtrl.addLike); 
+router.post('/likes', auth, postCtrl.addLike); 
 
-router.post('/signal', postCtrl.addSignal); 
-router.get('/signal', postCtrl.getAllSignals);
-router.delete('/signal', postCtrl.deleteSignal); 
+router.post('/signal', auth, postCtrl.addSignal); 
+router.get('/signal', auth, postCtrl.getAllSignals);
+router.delete('/signal', auth, postCtrl.deleteSignal); 
 
 
 

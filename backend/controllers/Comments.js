@@ -18,25 +18,24 @@ exports.postComment = async (req, res) => {
 };
 
 
-exports.deleteComment = (req, res) => {
+exports.deleteComment = async (req, res) => {
     //use the commentId to delete the comment 
   
         const id = req.params.id; 
         console.log(id);
-        const comment = Comments.findByPk(id);
-        comment.destroy()
-        .then(() => res.status(200).json({ message: 'Comments deleted !'}))
+        const comment = await Comments.findByPk(id); 
+        await comment.destroy().then(res.status(201).json({message: 'deleted'}))
+        
         .catch(error => res.status(400).json({ error: error, message: 'erreur', message: 'erreur' }));
 };
 
 exports.updateComment = async (req, res) => {
     const id = req.params.id;
-    const userId = res.body.userId;
     const content = req.body.content;
 
     
   
-    const comment = await Comments.update({ content }, { where: { id: id, UserId: userId } });
+    const comment = await Comments.update({ content }, { where: { id: id} });
     res.json(comment);
 
   };

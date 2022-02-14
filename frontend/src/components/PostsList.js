@@ -92,9 +92,15 @@ function PostsList(props) {
     let history = useHistory(); 
 
     const [displayInputs, setDisplay] = useState(false); 
+    const access_token = localStorage.getItem('token'); 
+  
 
     const deletePost = (e) => {
-        axios.delete(`http://localhost:3001/posts/${e}`)  
+        axios.delete(`http://localhost:3001/posts/${e}`, {
+            headers: {
+                'Authorization': `token ${access_token}`
+            }
+        })  
         .then(response => {
             console.log(response, 'deleted');    
         })
@@ -106,8 +112,11 @@ function PostsList(props) {
 
     const modifyDisplay = (e) => {
         console.log('goes into modify ');
-        setDisplay(true); 
-        console.log(displayInputs);
+    
+            setDisplay(true); 
+            console.log(displayInputs);
+    
+
 
         // axios.put(`http://localhost:3001/posts/${e}`)  
         // .then(response => {
@@ -152,13 +161,13 @@ function PostsList(props) {
                             Post: { post.postText },
                         </ol> */}
 
-                        <CommentairesContainer postId={post.id}></CommentairesContainer>
+                        <CommentairesContainer postId={post.id}  ></CommentairesContainer>
                         <div>
                  
 
                         {(function() {
                                 if (props.userConnected == post.UserId) {
-                                    return    <div><button onClick={() => { deletePost(post.id)}}> Supprimer</button> <button  onClick={() => { modifyDisplay()}}> Modifier </button></div>
+                                    return    <div><button onClick={() => { deletePost(post.id)}}> Supprimer</button> <button  onClick={() => { modifyDisplay(post.id)}}> Modifier </button></div>
                                 } 
                                 })()}
 

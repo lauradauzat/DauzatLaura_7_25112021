@@ -5,13 +5,18 @@ import { useHistory } from "react-router-dom";
 function ProfileContainer(props){
 
     let history = useHistory(); 
-    const [profile, setProfile] = useState([])
+    const [profile, setProfile] = useState([]); 
+    const access_token = localStorage.getItem('token');
 
     
         const fetchUrl = 'http://localhost:3001/auth/'+ props.userId; 
 
         useEffect(() => {
-            axios.get(fetchUrl).then(res => {
+            axios.get(fetchUrl, {
+                headers: {
+                    'Authorization': `token ${access_token}`
+                }
+            }).then(res => {
                 console.log('profile container res: ' + res)
                 setProfile(res.data)
             })

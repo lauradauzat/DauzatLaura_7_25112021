@@ -15,14 +15,19 @@ function Profile () {
   const [profile, setProfile] = useState([]); 
   const [displayInputs, setDisplay] = useState(false); 
   const fetchUrl = 'http://localhost:3001/auth/'+id; 
-  console.log ('display : ' +displayInputs)
+  console.log ('display : ' +displayInputs); 
+  const access_token = localStorage.getItem('token');
 
 
 
   const backToFeed = "/";
 
           useEffect(() => {
-            axios.get(fetchUrl).then(res => {
+            axios.get(fetchUrl, {
+              headers: {
+                  'Authorization': `token ${access_token}`
+              }
+          }).then(res => {
                 console.log('profile container res: ' + res)
                 setProfile(res.data)
             })
@@ -59,9 +64,14 @@ function Profile () {
   const sendModifyProfile = e => {
     e.preventDefault();
     console.log(profile); 
-          axios.put('http://localhost:3001/auth/'+id, profile)
+          axios.put('http://localhost:3001/auth/'+id, profile, {
+            headers: {
+                'Authorization': `token ${access_token}`
+            }
+        })
           .then(res => {
-            console.log(res)
+            console.log(res); 
+            setDisplay(false);
         })
         .catch(err => {
             console.log(err)
@@ -73,7 +83,11 @@ function Profile () {
 
     const confirm = window.confirm('Êtes vous sur.e de vouloir supprimer ce profil ? ');
     if (confirm) {
-          axios.delete('http://localhost:3001/auth/'+id)
+          axios.delete('http://localhost:3001/auth/'+id, {
+            headers: {
+                'Authorization': `token ${access_token}`
+            }
+        })
           .then(res => {
             localStorage.clear();
             console.log('deleted successfully')

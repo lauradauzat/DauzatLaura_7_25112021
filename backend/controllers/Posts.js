@@ -1,7 +1,7 @@
 
-const { Posts }  = require("../models");
-const { Likes }  = require('../models/'); 
-const { Signalements } = require("../models"); 
+const { Posts, Comments }  = require("../models");
+
+
 
 
 //imageUpload 
@@ -14,6 +14,7 @@ const fs = require('fs');
 const jwt = require('jsonwebtoken');
 // ??? 
 const { setUncaughtExceptionCaptureCallback } = require('process');
+const { REPL_MODE_SLOPPY } = require("repl");
 
 
 //GET Renvoie un tableau de tous les posts 
@@ -21,7 +22,14 @@ const { setUncaughtExceptionCaptureCallback } = require('process');
 exports.getAllPosts =  async (req, res) => {
 
     try {
-        const listOfPosts = await Posts.findAll();
+        const listOfPosts = await Posts.findAll(
+        //     {
+
+        //     include: [{
+        //         model: Comments
+        //     }]
+        // }
+        );
         console.log(listOfPosts); 
         res.json(listOfPosts);
     }
@@ -94,10 +102,19 @@ exports.deletePost = async (req, res) => {
     
     //need to find a way to  store the userId of the user clickin , the userId of the user that made the comment and the adminuserId
 
-   
+        // const userConnectedId = window.localStorage.getItem('id'); 
+        // const userConnected = await Users.findByPk(userConnectedId); 
         const id = req.params.id; 
         const post = await Posts.findByPk(id); 
-        post.destroy();
+        // if(userConnected.isAdmin || (userConnectedId == post.UserId)) {
+            post.destroy();
+        //     alert('ok')
+    
+        // } else {
+        //     alert('error in server')
+        // }
+
+     
     
     
 

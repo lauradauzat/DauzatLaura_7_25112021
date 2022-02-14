@@ -18,14 +18,16 @@ function TxtContainer(props){
         e.preventDefault();
     
         console.log(json); 
-        // const dataArray = new FormData();
-        // dataArray.append(json); 
-        axios.put("http://localhost:3001/posts/"+props.postId,  json)
-        //  {
-        //     // headers: {
-        //     //   "Content-Type": "multipart/form-data"
-        //     // }
-        //   })
+        const dataArray = new FormData();
+        const access_token = localStorage.getItem('token')
+        dataArray.append(json); 
+        axios.put("http://localhost:3001/posts/"+props.postId,  json, {
+          headers: {
+              'Authorization': `token ${access_token}`, 
+              "Content-Type": "multipart/form-data"
+          }
+      })
+  
             .then(response => {
                 console.log(response, 'posted'); 
             

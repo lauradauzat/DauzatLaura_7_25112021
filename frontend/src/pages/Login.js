@@ -14,9 +14,14 @@ function Login() {
     const userConnected = localStorage.getItem('id'); 
     const userIdUrl = 'http://localhost:3001/auth/'+userConnected; 
     const [user, getUser] = useState([])
+    const access_token = localStorage.getItem('token');
 
     useEffect(() => {
-        axios.get(userIdUrl).then(res => {
+        axios.get(userIdUrl, {
+            headers: {
+                'Authorization': `token ${access_token}`
+            }
+        }).then(res => {
             getUser(res.data)
         })
         .catch(err => {
