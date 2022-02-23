@@ -107,7 +107,9 @@ exports.deletePost = async (req, res) => {
         const id = req.params.id; 
         const post = await Posts.findByPk(id); 
         // if(userConnected.isAdmin || (userConnectedId == post.UserId)) {
-            post.destroy();
+            post.destroy()
+            .then(() => res.status(200).json({ message: 'Post supprimé !'}))
+            .catch(error => res.status(500).json({ error: error }));
         //     alert('ok')
     
         // } else {

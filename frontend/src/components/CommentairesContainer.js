@@ -11,6 +11,7 @@ function CommentairesContainer(props){
     const userConnected = localStorage.getItem('id'); 
     const postCommentUrl = 'http://localhost:3001/comments' ;
     const access_token = localStorage.getItem('token'); 
+    const { admin } = props; 
 
 //deleteComment
     const deletePost = (e) => {
@@ -20,7 +21,8 @@ function CommentairesContainer(props){
             }
         })  
         .then(res => {
-            console.log(res, 'deleted');    
+            console.log(res, 'deleted');  
+            setComments(comments.filter((comment) => comment.id !== e));  
            // let tmpComments = res.data; 
            // !! to fix : majke res.data envoyer l'id du comment ? 
             
@@ -113,8 +115,10 @@ function CommentairesContainer(props){
                          <div className="commentText">{comment.commentBody}</div>
                          {(function() {
                                 if (userConnected == comment.UserId) {
-                                    return    <div><button onClick={() => { deletePost(comment.id)}}> Supprimer</button> <button  onClick={() => { modifyPost(comment.id)}}> Modifier </button></div>
-                                } 
+                                    return    <div><button onClick={() => { deletePost(comment.id)}}> X</button> <button  onClick={() => { modifyPost(comment.id)}}> Modifier </button></div>
+                                } else if (admin) {
+                                    return    <div><button onClick={() => { deletePost(comment.id)}}> X </button></div>
+                                }
                                 })()}
 
                      </div>

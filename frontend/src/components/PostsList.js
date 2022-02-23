@@ -93,6 +93,7 @@ function PostsList(props) {
 
     const [displayInputs, setDisplay] = useState(false); 
     const access_token = localStorage.getItem('token'); 
+    let { admin, posts, setPosts } = props;
   
 
     const deletePost = (e) => {
@@ -102,7 +103,8 @@ function PostsList(props) {
             }
         })  
         .then(response => {
-            console.log(response, 'deleted');    
+            console.log(response, 'deleted');
+            setPosts(posts.filter((post) => post.id !== e));
         })
         .catch( error => {
             console.log(error);
@@ -127,7 +129,10 @@ function PostsList(props) {
         // })
     }
 
-    console.log('usercon' +props.userConnected); 
+    
+
+    // console.log('usercon' +props.userConnected); 
+    // console.log('is admin ??? ' + props.admin);
    
     
 
@@ -141,7 +146,7 @@ function PostsList(props) {
                       
                     <>
 
-                    <div className="postcard">
+                    <div className="postcard" key = {post.id }>
                         
                         <div className="up-container">
                         <ProfileContainer  userId={post.UserId}></ProfileContainer>
@@ -161,14 +166,16 @@ function PostsList(props) {
                             Post: { post.postText },
                         </ol> */}
 
-                        <CommentairesContainer postId={post.id}  ></CommentairesContainer>
+                        <CommentairesContainer postId={post.id} admin={admin} ></CommentairesContainer>
                         <div>
                  
 
                         {(function() {
                                 if (props.userConnected == post.UserId) {
-                                    return    <div><button onClick={() => { deletePost(post.id)}}> Supprimer</button> <button  onClick={() => { modifyDisplay(post.id)}}> Modifier </button></div>
-                                } 
+                                    return    <div><button onClick={() => { deletePost(post.id)}}> X</button> <button  onClick={() => { modifyDisplay(post.id)}}> Modifier </button></div>
+                                } else if (admin) {
+                                    return <div> <button onClick={() => { deletePost(post.id)}}> X</button></div>
+                                }
                                 })()}
 
                         </div>

@@ -5,23 +5,25 @@ import { useHistory } from "react-router-dom";
 function TxtContainer(props){
 
     const [text, setText] = useState(props.text); 
-    const [json, setJson] = useState([{"postText": text}]);
+    const [images, setImage] = useState(props.images);
+    const [send, setSend] = useState({postText: text, image: images});
     
 
-    const  changeHandler = e => {
+    const  changeHandler = (e) => {
         setText(e.target.value)
         console.log(text);
-        setJson({"postText": text});
+        setSend({"postText": text});
     }
+
 
     const sendModifiedText = e => {
         e.preventDefault();
     
-        console.log(json); 
+        console.log(send); 
         const dataArray = new FormData();
         const access_token = localStorage.getItem('token')
-        dataArray.append(json); 
-        axios.put("http://localhost:3001/posts/"+props.postId,  json, {
+        //dataArray.append(json); 
+        axios.put("http://localhost:3001/posts/"+props.postId,  send, {
           headers: {
               'Authorization': `token ${access_token}`, 
               "Content-Type": "multipart/form-data"
@@ -37,7 +39,6 @@ function TxtContainer(props){
                 console.log(error);
             })
       }
-    
   
 
             return (

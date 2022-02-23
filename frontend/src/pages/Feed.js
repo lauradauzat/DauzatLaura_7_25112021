@@ -38,13 +38,17 @@ function Feed() {
             })
         }, [])
     
+
+        //userConnected Info
         useEffect(() => {
             axios.get(userIdUrl, {
                 headers: {
                     'Authorization': `token ${access_token}`
                 }
             }).then(res => {
-                setUser(res.data)
+                setUser(res.data); 
+
+                
             })
             .catch(err => {
                 console.log(err)
@@ -70,7 +74,7 @@ function Feed() {
             <Login />
             <CreateAPost posts={posts} setPosts={setPosts}/>
             
-            <PostsList posts={posts} userConnected={userConnected} />
+            <PostsList posts={posts} setPosts={setPosts} userConnected={userConnected} admin={user.isAdmin} />
             </div>
           )
 

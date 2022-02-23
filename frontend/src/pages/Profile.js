@@ -15,10 +15,19 @@ function Profile () {
   const [profile, setProfile] = useState([]); 
   const [displayInputs, setDisplay] = useState(false); 
   const fetchUrl = 'http://localhost:3001/auth/'+id; 
-  console.log ('display : ' +displayInputs); 
+  //console.log ('display : ' +displayInputs); 
+  const userConnected = localStorage.getItem('id'); 
   const access_token = localStorage.getItem('token');
 
+  const [user, setUser] = useState([]);
+  const userIdUrl = 'http://localhost:3001/auth/'+userConnected; 
+ 
 
+  console.log('eeeeeeeee' + user.isAdmin);
+
+  
+
+  
 
   const backToFeed = "/";
 
@@ -29,21 +38,32 @@ function Profile () {
               }
           }).then(res => {
                 console.log('profile container res: ' + res)
-                setProfile(res.data)
+                setProfile(res.data); 
+                
             })
             .catch(err => {
                 console.log(err)
             })
         }, [])
+
+        //get the info of the user connected 
+        useEffect(() => {
+          axios.get(userIdUrl, {
+              headers: {
+                  'Authorization': `token ${access_token}`
+              }
+          }).then(res => {
+              setUser(res.data); 
+
+              
+          })
+          .catch(err => {
+              console.log(err)
+          })
+      }, [])
     
   const isAdmin = profile.isAdmin; 
-  console.log(isAdmin); 
-
-
-  const userConnected = localStorage.getItem('id'); 
-
-
-
+ // console.log(isAdmin); 
 
    const  changeHandler = e => {
       setProfile({[e.target.name]: e.target.value})
@@ -53,10 +73,7 @@ function Profile () {
   const displayModifyProfile = (e, displayInputs) => {
     console.log('goes into display modify profile function');
     setDisplay(true); 
-    console.log(displayInputs);
-
-
-
+    //console.log(displayInputs);
 
 
   }
@@ -153,13 +170,20 @@ function Profile () {
                             (function() {
                               // console.log('displauy : ' + displayInputs); 
                               if (userConnected == id) {
-                                console.log('goes in if buttons');
+                             
                                 return    <div> 
                                   <button  onClick={() => { displayModifyProfile()}}> Modifier le profil   <FontAwesomeIcon icon={faEdit} /></button>
                                   <button  onClick={() => { deleteProfile()}}> Supprimer le profil   <FontAwesomeIcon icon={faTrash} /> </button>
                     
                                 </div>
-                              } 
+                              } else if (user.isAdmin) {
+                               
+                                return <div> 
+                                <p> yoooo</p>
+                                  <button  onClick={() => { deleteProfile()}}>   <FontAwesomeIcon icon={faTrash} /> </button>
+                  
+                              </div>
+                              }
                         
                             })()
                           }
