@@ -90,8 +90,9 @@ import TxtContainer from "./TxtContainer";
 function PostsList(props) {
 
     let history = useHistory(); 
+    
 
-    const [displayInputs, setDisplay] = useState(false); 
+    const [displayInputs, setDisplay] = useState(0); 
     const access_token = localStorage.getItem('token'); 
     let { admin, posts, setPosts } = props;
   
@@ -112,10 +113,10 @@ function PostsList(props) {
     }
 
 
-    const modifyDisplay = (e) => {
+    const modifyDisplay = (postId) => {
         console.log('goes into modify ');
     
-            setDisplay(true); 
+            setDisplay(postId); 
             console.log(displayInputs);
     
 

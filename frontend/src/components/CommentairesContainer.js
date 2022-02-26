@@ -10,8 +10,16 @@ function CommentairesContainer(props){
     const fetchUrl = 'http://localhost:3001/comments/'+ props.postId; 
     const userConnected = localStorage.getItem('id'); 
     const postCommentUrl = 'http://localhost:3001/comments' ;
+   
     const access_token = localStorage.getItem('token'); 
     const { admin } = props; 
+    const [inputComment, setInputComment] = useState(0); 
+    const [modifiedComment, setModifiedComment] = useState("");
+    const [sendCom, setSendCom] = useState({
+        'commentBody': modifiedComment
+    }) 
+
+   
 
 //deleteComment
     const deletePost = (e) => {
@@ -34,17 +42,54 @@ function CommentairesContainer(props){
     }
 
 
-    const modifyPost = (e) => {
+    const modifyPost = (commentId) => {
         console.log('goes into modify ');
+        setInputComment(commentId); 
+        console.log('dieeeeeeeeeees' + inputComment);
+    
+    }
 
+    const  changeHandler = (e) => {
+       setModifiedComment(e.target.value);
+      
+       setSendCom({
+        commentBody: modifiedComment
+        });
+       console.log(sendCom);
+  
+    }
 
-        // axios.put(`http://localhost:3001/comments/${e}`)  
-        // .then(response => {
-        //     console.log(response, 'modified');    
-        // })
-        // .catch( error => {
-        //     console.log(error);
-        // })
+    const  submitModifiedCommentHandler = (e) => {
+        e.preventDefault();
+        const access_token = localStorage.getItem('token');
+        const commentId = e.currentTarget.getAttribute("commentId"); 
+        const modifyCommentUrl = 'http://localhost:3001/comments/'+commentId; 
+    
+        // console.log('url ' +  modifyCommentUrl);
+        // console.log('submit handler clicked')
+    
+        setSendCom({commentBody : modifiedComment});
+        console.log ('sendcom   = ' + sendCom); 
+       
+        axios.put(modifyCommentUrl, sendCom, {
+            headers: {
+                'Authorization': `token ${access_token}`
+            }
+        })  
+        .then(res => {
+            console.log(res, 'modified'); 
+            let tmpComments = [...comments];
+            console.log('tmp :' + tmpComments); 
+            console.log('res.data : ' + res.data); 
+            // let newComment = res.data; 
+            // tmpComments.push(res.data); 
+            //  setComments(tmpComments); 
+            setInputComment(0);
+        })
+        .catch( error => {
+            console.log(error);
+        })
+
     }
 
 
@@ -112,14 +157,43 @@ function CommentairesContainer(props){
              {comments.map( comment => (
                      <div className="com" key={comment.id}>
                          <ProfileContainer userId={comment.UserId}/>
-                         <div className="commentText">{comment.commentBody}</div>
-                         {(function() {
-                                if (userConnected == comment.UserId) {
-                                    return    <div><button onClick={() => { deletePost(comment.id)}}> X</button> <button  onClick={() => { modifyPost(comment.id)}}> Modifier </button></div>
-                                } else if (admin) {
-                                    return    <div><button onClick={() => { deletePost(comment.id)}}> X </button></div>
-                                }
-                                })()}
+
+                         
+                         {
+                                (function() {
+    
+                                if (inputComment === comment.id ) {
+                            
+                                return    <div> 
+                                <form onSubmit={submitModifiedCommentHandler} commentId={comment.id}>
+                                <input className="com-container"  placeholder={comment.commentBody} name="commentText" value={modifiedComment} onChange={changeHandler} ></input>
+                                   
+                                <button type='submit'>Confirmer les modifications</button>
+                                </form>
+                                </div>
+                            
+
+                                  }   else {
+                                        return ( <><div className="commentText">{comment.commentBody}</div></>)
+                                       
+                                    
+                                }   
+                                })()
+                        }
+                            
+                            {(function() {
+                                            if (userConnected == comment.UserId ) {
+                                                return    <div><button onClick={() => { deletePost(comment.id)}}> X</button> <button  onClick={() => { modifyPost(comment.id)}}> Modifier </button></div>
+                                            } else if (admin) {
+                                                return    <div><button onClick={() => { deletePost(comment.id)}}> X </button></div>
+                                            }
+                                            })()}
+                                                  
+                            
+                            
+                         
+                         
+                       
 
                      </div>
              ))}

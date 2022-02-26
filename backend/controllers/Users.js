@@ -38,15 +38,17 @@ exports.login =  async (req, res, next) => {
       if (!match) res.json({error: "Wrong password"}); 
 
       res.status(200).json({
+        
         userId: user.id,
+        isAdmin: user.isAdmin,
         token: jwt.sign(
-          { userId: user.id },
+          { userId: user.id, isAdmin: user.isAdmin },
           'RANDOM_TOKEN_SECRET',
           { expiresIn: '24h' }
         )
       });
  
-      //res.json ("You are logged in"); 
+      res.json ("You are logged in"); 
          // a rajouter : va renvoyer userId et token dans le local storage du navigateur 
       
     }); 
@@ -80,10 +82,14 @@ exports.updateProfile = async (req, res, next) => {
 exports.deleteProfile = async (req, res, next) => {
   const id = req.params.id; 
   const user = await Users.findByPk(id); 
-  user.destroy()
-  .then(() => res.status(200).json({ message: 'Objet supprimé !'}))
-  .catch(error => res.status(500).json({ error: error }));
-
+  const isAdmin = res.locals.isAdmin;
+  const currentUser = res.locals.userId;
+  
+  if( (isAdmin) || (currentUser == user.id)) {
+      user.destroy()
+      .then(() => res.status(200).json({ message: 'Objet supprimé !'}))
+      .catch(error => res.status(500).json({ error: error }));
+  }
 };
 
 

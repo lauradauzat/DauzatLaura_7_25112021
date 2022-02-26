@@ -20,6 +20,9 @@ const { REPL_MODE_SLOPPY } = require("repl");
 //GET Renvoie un tableau de tous les posts 
 
 exports.getAllPosts =  async (req, res) => {
+    const isAdmin = res.locals.isAdmin;
+    const currentUser = res.locals.userId;
+    console.log('isadmin'+ isAdmin);
 
     try {
         const listOfPosts = await Posts.findAll(
@@ -30,8 +33,10 @@ exports.getAllPosts =  async (req, res) => {
         //     }]
         // }
         );
-        console.log(listOfPosts); 
+        //console.log(listOfPosts); 
         res.json(listOfPosts);
+        
+       
     }
     catch(e) {
         console.log('Catch an error: ', e)
@@ -53,6 +58,7 @@ exports.createPost = async ( req, res, next) => {
     //console.log('req.body :' + req.body);
 
     let postContent = {}; 
+
 
     if (req.file) {
 
@@ -78,7 +84,7 @@ exports.createPost = async ( req, res, next) => {
     })
     .catch( error => {return res.status(500).json( {error: error, message: 'erreur'})});
     
-    console.log('post : '+ post);
+    //console.log('post : '+ post);
 
 }
 
@@ -89,12 +95,31 @@ exports.createPost = async ( req, res, next) => {
 exports.modifyPost = async (req, res, next) => {
     const id = req.params.id; 
     const post = await Posts.findByPk(id); 
+
     //console.log(post); 
-    console.log(post.postText);
-    
-    await post.update({ postText: req.body.postText })
-      .then(() => res.status(200).json({ post, message: 'Objet modifié !'}))
-      .catch(error => res.status(400).json({ error }));
+    //console.log(post.postText);
+    let postContent = {}; 
+
+    if (req.file) {
+
+        postContent = {
+            postText: req.body.postText,
+            image: req.file.path
+        }
+
+    }  else {
+        postContent = {
+            postText: req.body.postText
+        }
+    }
+    const isAdmin = res.locals.isAdmin;
+    const currentUser = res.locals.userId;
+
+         if( (isAdmin) || (currentUser == post.UserId)) {
+            post.update(postContent)
+            .then((post) => res.status(200).json({ post, postContent, message: 'Objet modifié !'}))
+            .catch(error => res.status(400).json({ error }));
+         }
   };
 
 
@@ -105,17 +130,23 @@ exports.deletePost = async (req, res) => {
         // const userConnectedId = window.localStorage.getItem('id'); 
         // const userConnected = await Users.findByPk(userConnectedId); 
         const id = req.params.id; 
-        const post = await Posts.findByPk(id); 
-        // if(userConnected.isAdmin || (userConnectedId == post.UserId)) {
-            post.destroy()
-            .then(() => res.status(200).json({ message: 'Post supprimé !'}))
-            .catch(error => res.status(500).json({ error: error }));
-        //     alert('ok')
-    
-        // } else {
-        //     alert('error in server')
-        // }
+        const isAdmin = res.locals.isAdmin;
+        const currentUser = res.locals.userId;
+        console.log('isadmin' + isAdmin + '    ' + currentUser);
 
+        
+            const post = await Posts.findByPk(id); 
+    
+             if( (isAdmin) || (currentUser == post.UserId)) {
+                post.destroy()
+                .then(() => res.status(200).json({ message: 'Post supprimé !'}))
+                .catch(error => res.status(403).json({ error: error }));
+                
+        
+             } 
+    
+    
+       
      
     
     
@@ -130,8 +161,8 @@ exports.addLike = ( req, res, next) => {
     //pour récupérer le userId utiliser plus tard le localstorage plutôt que le req.body
     const userId = req.body.userId; 
     const postId = req.body.postId; 
-    console.log("USER ID  : " + userId);
-    console.log(postId); 
+    //console.log("USER ID  : " + userId);
+    //console.log(postId); 
  
     const newLike = Likes.create({
         userId: userId, 

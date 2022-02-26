@@ -21,22 +21,32 @@ exports.postComment = async (req, res) => {
 exports.deleteComment = async (req, res) => {
     //use the commentId to delete the comment 
   
-        const id = req.params.id; 
-        console.log(id);
-        const comment = await Comments.findByPk(id); 
-        await comment.destroy().then(res.status(201).json({message: 'deleted'}))
-        
-        .catch(error => res.status(400).json({ error: error, message: 'erreur', message: 'erreur' }));
+    const isAdmin = res.locals.isAdmin;
+    const currentUser = res.locals.userId;
+    const id = req.params.id; 
+    //console.log(id);
+    const comment = await Comments.findByPk(id); 
+
+         if( (isAdmin) || (currentUser == comment.UserId)) {
+           
+            await comment.destroy().then(res.status(201).json({message: 'deleted'}))
+            
+            .catch(error => res.status(400).json({ error: error, message: 'erreur', message: 'erreur' }));
+        }   
 };
 
 exports.updateComment = async (req, res) => {
     const id = req.params.id;
-    const content = req.body.content;
+    const commentBody = req.body.commentBody;
+    const currentUser = res.locals.userId;
+    const comment = await Comments.findByPk(id)
+    //.catch(error => res.status(500).json({ error: error, message: 'erreur', message: 'erreur' }));
 
-    
+    //if (currentUser == comment.UserId) {
+        await comment.update({ commentBody }, { where: { id: id} });
+        res.json(comment)
+        .catch(error => res.status(400).json({ error: error, message: 'erreur', message: 'erreur' }));
+    //}
   
-    const comment = await Comments.update({ content }, { where: { id: id} });
-    res.json(comment);
-
   };
   

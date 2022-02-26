@@ -12,18 +12,35 @@ function TxtContainer(props){
     const  changeHandler = (e) => {
         setText(e.target.value)
         console.log(text);
-        setSend({"postText": text});
+        setSend({postText: text, image: images});
     }
 
+    const handleFile = e => {
+      console.log(e.target.files, "$$$$$$");
+      console.log(e.target.files[0], "$$$$$$");
+      setImage(e.target.files[0])
+      setSend({postText : text, image: images });
+      console.log(send);
+  }
+  
 
-    const sendModifiedText = e => {
+
+    const sendModifiedText = (e) => {
         e.preventDefault();
-    
+        const access_token = localStorage.getItem('token');
         console.log(send); 
+        setImage();
+        setImage();
+        setSend();
         const dataArray = new FormData();
-        const access_token = localStorage.getItem('token')
+        dataArray.append('postText', text); 
+        //dataArray.append('UserId', userId); 
+        dataArray.append('image', images);
+        console.log('datatarray: ' + dataArray);
+       
+        
         //dataArray.append(json); 
-        axios.put("http://localhost:3001/posts/"+props.postId,  send, {
+        axios.put("http://localhost:3001/posts/"+props.postId,  dataArray, {
           headers: {
               'Authorization': `token ${access_token}`, 
               "Content-Type": "multipart/form-data"
@@ -46,17 +63,20 @@ function TxtContainer(props){
             {
                             (function() {
   
-              if (props.displayInputs === true ) {
+              if (props.displayInputs === props.postId ) {
                 
                 return    <div> 
                     <form onSubmit={sendModifiedText}>
                       <input className="txt-container"  placeholder={props.text} name="postText" value={text} onChange={changeHandler}></input>
-     
+                        <div className='file-form'>
+                            <label>Choisir une image</label>
+                            <input type="file" name="file" onChange={handleFile}></input>
+                         </div>
                       <button type='submit'>Confirmer les modifications</button>
                     </form>
                   </div>
               } 
-              else if (props.displayInputs === false)
+              else 
               {
            
                 return (

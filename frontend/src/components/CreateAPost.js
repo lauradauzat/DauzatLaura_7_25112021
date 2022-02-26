@@ -71,7 +71,7 @@ function CreateAPost (props)  {
 
     const submitHandler = (e)  => {
         e.preventDefault()
-        console.log(post)
+        console.log('post ' + post)
         setSend()
         const access_token = localStorage.getItem('token'); 
         const dataArray = new FormData();
@@ -79,25 +79,34 @@ function CreateAPost (props)  {
         dataArray.append('UserId', userId); 
         dataArray.append('image', images);
 
+        if ((post == "") && (images == null)) {
+
+            alert('Oups, il semble que vous essayez de publier un post vide !');
+
+        } else {
+           
+            console.log( 'send = ' + dataArray);
+            axios.post("http://localhost:3001/posts",  dataArray, {
+                headers: {
+                  "Content-Type": "multipart/form-data", 
+                  'Authorization': `token ${access_token}`
+                }
+              })
+                .then(response => {
+                    console.log(response, 'posted'); 
+                    let tmpPosts = [...postArray];
+                    tmpPosts.push(response.data); 
+                    setPosts(tmpPosts); 
+                    
+                    
+                })
+                .catch( error => {
+                    console.log(error);
+                })
+        }
+
         
-        console.log( 'send = ' + dataArray);
-        axios.post("http://localhost:3001/posts",  dataArray, {
-            headers: {
-              "Content-Type": "multipart/form-data", 
-              'Authorization': `token ${access_token}`
-            }
-          })
-            .then(response => {
-                console.log(response, 'posted'); 
-                let tmpPosts = [...postArray];
-                tmpPosts.push(response.data); 
-                setPosts(tmpPosts); 
-                
-            })
-            .catch( error => {
-                console.log(error);
-            })
-        
+      
         //window.location.reload();
      }
 

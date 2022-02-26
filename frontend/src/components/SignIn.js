@@ -2,9 +2,10 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
-function populateStorage(id, token) {
+function populateStorage(id, token, isAdmin) {
     localStorage.setItem('id', id);
     localStorage.setItem('token', token);
+    localStorage.setItem('isAdmin', isAdmin);
   }
 
  class SignIn extends Component {
@@ -30,8 +31,8 @@ function populateStorage(id, token) {
         console.log(this.state); 
         axios.post("http://localhost:3001/auth/login", this.state)
             .then(response => {
-                console.log(response, 'you are logged in'); 
-                populateStorage(response.data.userId,response.data.token); 
+                console.log(response.data, 'you are logged in'); 
+                populateStorage(response.data.userId,response.data.token, response.data.isAdmin); 
                 window.location.reload();
             })
             .catch( error => {
