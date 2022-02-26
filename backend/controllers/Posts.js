@@ -98,7 +98,10 @@ exports.modifyPost = async (req, res, next) => {
 
     //console.log(post); 
     //console.log(post.postText);
-    let postContent = {}; 
+    //let postContent = {}; 
+
+    // post.postText = req.body.postText; 
+    // post.image = req.file.path; 
 
     if (req.file) {
 
@@ -115,11 +118,80 @@ exports.modifyPost = async (req, res, next) => {
     const isAdmin = res.locals.isAdmin;
     const currentUser = res.locals.userId;
 
-         if( (isAdmin) || (currentUser == post.UserId)) {
+        // if( (isAdmin) || (currentUser == post.UserId)) {
+            // post.update({
+            //     postText : req.body.postText,
+            //     image: req.file.path
+            // })
             post.update(postContent)
             .then((post) => res.status(200).json({ post, postContent, message: 'Objet modifié !'}))
             .catch(error => res.status(400).json({ error }));
-         }
+        // }
+
+
+
+
+    //new try 
+
+
+    // let postContent = {}; 
+    // const id = req.params.id; 
+
+
+    // if (req.file) {
+
+    //     postContent = {
+    //         postText: req.body.postText,
+    //         image: req.file.path
+    //     }
+
+    // }  else {
+        
+    //     postContent = {
+    //         postText: req.body.postText
+    //     }
+        
+    // }
+
+
+    // const post = await Posts.findByPk(id);
+    // console.log(postContent); 
+    // console.log(post);
+    // post.update(postContent)
+    // .then(post => {
+    //     return res.status(201).json(post); 
+    // })
+    // .catch( error => {return res.status(500).json( {error: error, message: 'erreur'})});
+
+
+    ///try3 
+    // const id = req.params.id;
+    // const postText = req.body.postText;
+    // const image = req.body.image;
+    // await Posts.update({ postText, image }, { where: { id: id } })
+
+    //   .then(() => {
+    //     res.status(200).json({ message: "update with succes !" });
+    //   })
+    //   .catch((error) => {
+    //     res.status(500).json({ error });
+    //   });
+
+   // try4
+
+    //   const postObject = req.file ?
+    //   {
+    //     ...JSON.parse(req.body.post),
+    //     image: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+    //   } : { ...req.body };
+
+    // const post = await Posts.findByPk(id);
+    // post.update({...postObject})
+    //   .then(() => res.status(200).json({ message: 'Objet modifié !'}))
+    //   .catch(error => res.status(400).json({ error }));
+     
+
+
   };
 
 

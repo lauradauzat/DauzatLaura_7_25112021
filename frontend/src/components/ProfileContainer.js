@@ -46,14 +46,7 @@ function ProfileContainer(props){
             )
 
         }
-    
-    
-       
 
-    
-
-
- 
 }
   
 

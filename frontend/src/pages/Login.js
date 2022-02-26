@@ -59,8 +59,8 @@ function Login() {
             <BannerSmall />
             
             <div className='Hello'><p>Bonjour, {user.username}</p></div>
-            <button onClick={routeToMyProfile}> Mon profil </button>
-            <LogoutBtn/>
+            
+            <LogoutBtn routeToMyProfile={routeToMyProfile}/>
             </div>
           )
 

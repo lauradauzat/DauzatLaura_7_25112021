@@ -28,11 +28,18 @@ body {
   color: #d6694e;
 }
 
+.bannerSmall img:hover {
+  cursor: pointer;
+}
+
 button.logOut {
-  border: #ff613d solid 3px;
   background-color: none;
   outline: none;
   margin-right: 10px;
+}
+
+button:hover {
+  cursor: pointer;
 }
 
 .NewPost_container {

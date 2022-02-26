@@ -43,7 +43,7 @@ exports.updateComment = async (req, res) => {
     //.catch(error => res.status(500).json({ error: error, message: 'erreur', message: 'erreur' }));
 
     //if (currentUser == comment.UserId) {
-        await comment.update({ commentBody }, { where: { id: id} });
+        await comment.update({ commentBody });
         res.json(comment)
         .catch(error => res.status(400).json({ error: error, message: 'erreur', message: 'erreur' }));
     //}

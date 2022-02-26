@@ -4,7 +4,7 @@ import ProfileContainer from "./ProfileContainer";
 
 function CommentairesContainer(props){
 
-    // const fetchUrl = 'http://localhost:3001/comments/' + props.postId; 
+    //const fetchUrl = 'http://localhost:3001/comments/' + props.postId; 
 
     const [comments, setComments] = useState([])
     const fetchUrl = 'http://localhost:3001/comments/'+ props.postId; 
@@ -16,7 +16,7 @@ function CommentairesContainer(props){
     const [inputComment, setInputComment] = useState(0); 
     const [modifiedComment, setModifiedComment] = useState("");
     const [sendCom, setSendCom] = useState({
-        'commentBody': modifiedComment
+        commentBody: modifiedComment
     }) 
 
    
@@ -31,10 +31,6 @@ function CommentairesContainer(props){
         .then(res => {
             console.log(res, 'deleted');  
             setComments(comments.filter((comment) => comment.id !== e));  
-           // let tmpComments = res.data; 
-           // !! to fix : majke res.data envoyer l'id du comment ? 
-            
-           // setComments(tmpComments); 
         })
         .catch( error => {
             console.log(error);
@@ -85,6 +81,7 @@ function CommentairesContainer(props){
             // tmpComments.push(res.data); 
             //  setComments(tmpComments); 
             setInputComment(0);
+        
         })
         .catch( error => {
             console.log(error);

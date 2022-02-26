@@ -9,38 +9,28 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 
 function Profile () {
-  // console.log('coucou profile page');
   const { id }  = useParams(); 
   let history = useHistory(); 
   const [profile, setProfile] = useState([]); 
   const [displayInputs, setDisplay] = useState(false); 
   const fetchUrl = 'http://localhost:3001/auth/'+id; 
-  //console.log ('display : ' +displayInputs); 
   const userConnected = localStorage.getItem('id'); 
   const access_token = localStorage.getItem('token');
   const userConnectedIsAdmin = localStorage.getItem('isAdmin'); 
-
   const [user, setUser] = useState([]);
   const userIdUrl = 'http://localhost:3001/auth/'+userConnected; 
- 
-
-  console.log('eeeeeeeee' + user.isAdmin);
-
-  
-
-  
-
   const backToFeed = "/";
+  const isAdmin = profile.isAdmin; 
 
-          useEffect(() => {
+      
+        //fetch the profile info 
+        useEffect(() => {
             axios.get(fetchUrl, {
               headers: {
                   'Authorization': `token ${access_token}`
               }
           }).then(res => {
-                console.log('profile container res: ' + res)
                 setProfile(res.data); 
-                
             })
             .catch(err => {
                 console.log(err)
@@ -63,9 +53,9 @@ function Profile () {
           })
       }, [])
     
-  const isAdmin = profile.isAdmin; 
- // console.log(isAdmin); 
+ 
 
+//logic to hangle content modification 
    const  changeHandler = e => {
       setProfile({[e.target.name]: e.target.value})
     }
@@ -74,23 +64,6 @@ function Profile () {
   const displayModifyProfile = (e, displayInputs) => {
     console.log('goes into display modify profile function');
     setDisplay(true); 
-    //console.log(displayInputs);
-
-
-  }
-
-  const redirectionProcessAfterDelete = (e) => {
-    console.log('userconisadmin' + userConnectedIsAdmin); 
-    console.log('proilfuserID : ' + profile.id);
-    console.log('userConnected : ' + userConnected );
-    if (userConnected == profile.id){
-      console.log('goes to login');
-      localStorage.clear();
-      history.push(backToFeed);
-    } else {
-      console.log('goes to feed'); 
-      history.push(backToFeed);
-    }
   }
 
   const sendModifyProfile = e => {
@@ -109,6 +82,12 @@ function Profile () {
             console.log(err)
         })
   }
+
+
+
+  //Logic to handle delete
+
+
 
   const deleteProfile = (e) => {
     console.log('goes into delete profile funciton');
@@ -134,21 +113,33 @@ function Profile () {
    
   }
 
+  const redirectionProcessAfterDelete = (e) => {
+    console.log('userconisadmin' + userConnectedIsAdmin); 
+    console.log('proilfuserID : ' + profile.id);
+    console.log('userConnected : ' + userConnected );
+    if (userConnected == profile.id){
+      console.log('goes to login');
+      localStorage.clear();
+      history.push(backToFeed);
+    } else {
+      console.log('goes to feed'); 
+      history.push(backToFeed);
+    }
+  }
+
+
+
+//JSX 
 
 
   return (
     <> <BannerSmall />
-    {/* <div>
-      <button onClick={() => {history.push(backToFeed)}} > Retourner au Feed</button>
-    </div>
-     */}
 
-        Profile : {id}
         <div>
          
         {
           (function() {
-            // console.log('displauy : ' + displayInputs); 
+
             if (displayInputs === true ) {
               
               return    <div> 
@@ -169,29 +160,20 @@ function Profile () {
             {
               return   <><div> <h1> {profile.username}</h1> </div>
 
-                      <div>     <p> E-mail : {profile.email}</p>  </div>
+                      <div> 
+                         <p> E-mail : {profile.email}</p>  </div>
+                         {isAdmin == '1'  && <p>Profil admin : oui </p> }
 
-                                                
-                          <p>Profil admin : 
-
-                  {isAdmin == '1' &&
-                  <p> oui </p>} 
-                  {isAdmin == null &&
-                  <p> non </p>} 
-
-
-                          
-                        </p>
-                        <div>
+                       <div>
                                    
                           {
                             (function() {
-                              // console.log('displauy : ' + displayInputs); 
+ 
                               if (userConnected == id) {
                              
                                 return    <div> 
-                                  <button  onClick={() => { displayModifyProfile()}}> Modifier le profil   <FontAwesomeIcon icon={faEdit} /></button>
-                                  <button  onClick={() => { deleteProfile()}}> Supprimer le profil   <FontAwesomeIcon icon={faTrash} /> </button>
+                                  <button  onClick={() => { displayModifyProfile()}}> <FontAwesomeIcon icon={faEdit} /></button>
+                                  <button  onClick={() => { deleteProfile()}}> <FontAwesomeIcon icon={faTrash} /> </button>
                     
                                 </div>
                               } else if (user.isAdmin) {
@@ -206,14 +188,10 @@ function Profile () {
                             })()
                           }
 
-
                           </div>
 
-              
               </>
-              
 
-         
             }
           })()
         }

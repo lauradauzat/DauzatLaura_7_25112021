@@ -5,7 +5,7 @@ import Profile  from '../pages/Profile';
 import Login from "../pages/Login";
 import Feed from "../pages/Feed";
 import { useLocation } from "react-router-dom";
-import NewAccount from "../pages/NewAccount";
+
 
 const routes = [
 

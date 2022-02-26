@@ -13,6 +13,8 @@ body {
   width: 305px; 
 }
 
+
+
 .bannerSmall img {
   width: 100px;
 }
@@ -28,11 +30,19 @@ body {
 
 }
 
+.bannerSmall img:hover {
+  cursor: pointer; 
+}
+
 button.logOut {
-  border: rgb(255, 97, 61) solid 3px;
   background-color: none;
   outline: none;
   margin-right: 10px;
+  
+}
+
+button:hover {
+  cursor: pointer;
 }
 
 //CreateAPost 

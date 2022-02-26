@@ -1,14 +1,8 @@
-
-
-
 import React, { Component, useState, useEffect } from 'react'
 import axios from "axios"; 
 import CreateAPost  from '../components/CreateAPost'
 import PostsList from '../components/PostsList'
 import Login from './Login'
-
-
-
 
 function Feed() {
 
@@ -20,9 +14,6 @@ function Feed() {
     const userIdUrl = 'http://localhost:3001/auth/'+userConnected; 
     const access_token = localStorage.getItem('token'); 
 
-
-
-        
 
         //get the posts 
         useEffect(() => {
@@ -55,10 +46,7 @@ function Feed() {
             })
         }, [])
     
-   
-    // const userId = localStorage.getItem('id');
-    // const [send, setSend] = useState({postText: '',  UserId: userId, image: null});
-    // send={send} setSend={setSend} userId={userId} 
+
 
     if (localStorage.getItem("token") === null) {
         return (

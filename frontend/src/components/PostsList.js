@@ -9,93 +9,12 @@ import ProfileContainer from "./ProfileContainer";
 import TxtContainer from "./TxtContainer"; 
 
 
-// class PostsList extends React.Component {
-
-//     // Constructor 
-//     constructor(props) {
-//         super(props);
-   
-//         this.state = {
-//             items: [],
-//             DataisLoaded: false
-//         };
-//     }
-
-
-
-   
-//     // ComponentDidMount is used to
-//     // execute the code 
-//     componentDidMount() {
-//         fetch(
-//         "http://localhost:3001/posts")
-//             .then((res) => res.json(console.log(res)))
-//             .then((json) => {
-//                 this.setState({
-//                     items: json,
-//                     DataisLoaded: true
-//                 });
-               
-//             })
-
-            
-    
-
-//     render() {
-        
-        
-//         const { DataisLoaded, items } = this.state;
-       
-//         if (!DataisLoaded) return <div>
-//             <h1> Chargement en cours.... </h1> </div> ;
-
-//         return (
-          
-//             <div className = "Post-container">
-//                 <h1> Salut {userLoggedIn} </h1>
-              
-//                   {
-//                     items.map((item) => (
-                      
-//                     <>
-//                          <ImgContainer imageRef={item.image}></ImgContainer>
-//                          <ProfileContainer  userId={item.UserId}></ProfileContainer>
-                         
-//                         <ol key = { item.id } >
-                           
-//                             Username: { item.UserId}, 
-//                             PostId : {item.id}, 
-//                             imageUrl: {item.image}
-//                             Post: { item.postText },
-//                         </ol>
-
-//                         <CommentairesContainer postId={item.id}></CommentairesContainer>
-                        
-//                     </>    
-                    
-//                     ))
-//                 }
-//             </div>
-//          );
-//     }
-
- 
-
-
-
-
-//  }
-
-
 function PostsList(props) {
-
-    let history = useHistory(); 
     
-
     const [displayInputs, setDisplay] = useState(0); 
     const access_token = localStorage.getItem('token'); 
     let { admin, posts, setPosts } = props;
-  
+
 
     const deletePost = (e) => {
         axios.delete(`http://localhost:3001/posts/${e}`, {
@@ -111,75 +30,95 @@ function PostsList(props) {
             console.log(error);
         })
     }
-
+ 
+  
 
     const modifyDisplay = (postId) => {
-        console.log('goes into modify ');
-    
-            setDisplay(postId); 
-            console.log(displayInputs);
-    
-
-
-        // axios.put(`http://localhost:3001/posts/${e}`)  
-        // .then(response => {
-        //     console.log(response, 'modified');    
-        // })
-        // .catch( error => {
-        //     console.log(error);
-        // })
+        setDisplay(postId); 
     }
 
-    
+     const [image, setImage] = useState();
+     const [send, setSend] = useState({image: image});
 
-    // console.log('usercon' +props.userConnected); 
-    // console.log('is admin ??? ' + props.admin);
-   
-    
+    const handleFile = (e)=> {
+      //console.log(e.target.files, "$$$$$$");
+      //console.log(e.target.files[0], "$$$$$$");
+      setImage(e.target.files[0])
+      setSend({image: image });
+      //console.log(send);
+     }
+
+     const sendModifiedPhoto = (e) => {
+         e.preventDefault(); 
+         setSend();
+         const access_token = localStorage.getItem('token'); 
+         const dataArray = new FormData();
+         dataArray.append('image', image);
+         axios.put(`http://localhost:3001/posts/${e}`,  dataArray, {
+            headers: {
+              "Content-Type": "multipart/form-data", 
+              'Authorization': `token ${access_token}`
+            }
+          })
+            .then(response => {
+                console.log(response, 'posted'); 
+                let tmpPosts = [...posts];
+                tmpPosts.push(response.data); 
+                setPosts(tmpPosts); 
+                
+                
+            })
+            .catch( error => {
+                console.log(error);
+            })
+  
+         
+     }
 
     return (
         <>
        
         <div className="feed-container">
-        {
-            
-                    props.posts.slice(0).reverse().map((post) => (
-                      
-                    <>
+        {  
+            props.posts.slice(0).reverse().map((post) => (          
+             <>
 
-                    <div className="postcard" key = {post.id }>
+                <div className="postcard" key = {post.id }>
                         
-                        <div className="up-container">
-                        <ProfileContainer  userId={post.UserId}></ProfileContainer>
-                         <TxtContainer postId={post.id} text={post.postText} displayInputs={displayInputs} ></TxtContainer>
-                        </div>
-                        
-                         <ImgContainer imageRef={post.image}></ImgContainer>
-                        
-          
-                        
-                         
-                        {/* <ol key = { post.id } >
-                           
-                            Username: { post.UserId}, 
-                            PostId : {post.id}, 
-                            imageUrl: {post.image}
-                            Post: { post.postText },
-                        </ol> */}
+                     <div className="up-container">
+                    <ProfileContainer  userId={post.UserId}></ProfileContainer>
+                    <TxtContainer postId={post.id} text={post.postText} displayInputs={displayInputs} setDisplay={setDisplay} ></TxtContainer>
+                    </div>
+                            
+                    <ImgContainer imageRef={post.image}></ImgContainer>
+                            
+                    <CommentairesContainer postId={post.id} admin={admin} ></CommentairesContainer>
+                
+                
+                 <div>
 
-                        <CommentairesContainer postId={post.id} admin={admin} ></CommentairesContainer>
-                        <div>
-                 
+                    {(function() {
+                        if (props.userConnected == post.UserId) {
+                            return  <div>
+                                        <button onClick={() => { deletePost(post.id)}}> X</button> 
+                                        <button  onClick={() => { modifyDisplay(post.id)}}> Modifier </button> 
+                                            {displayInputs===post.id 
+                                            &&  
+                                            <form onSubmit={sendModifiedPhoto}>
+                                            <div className='file-form'>
+                                                    <label>Choisir une image</label>
+                                                    <input type="file" name="file" onChange={handleFile}></input>
+                                            </div>
+                                            <button type='submit'>Confirmer les modifications</button>
+                                            </form>
+                                            }
+                                    </div>
+                        } else if (admin) {
+                            return <div> <button onClick={() => { deletePost(post.id)}}> X</button></div>
+                        }
+                        })()}
 
-                        {(function() {
-                                if (props.userConnected == post.UserId) {
-                                    return    <div><button onClick={() => { deletePost(post.id)}}> X</button> <button  onClick={() => { modifyDisplay(post.id)}}> Modifier </button></div>
-                                } else if (admin) {
-                                    return <div> <button onClick={() => { deletePost(post.id)}}> X</button></div>
-                                }
-                                })()}
-
-                        </div>
+                     </div>
                   
                         
                   
