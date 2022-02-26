@@ -24,7 +24,8 @@ import axios from 'axios'
         console.log(this.state)
         axios.post("http://localhost:3001/auth/signup", this.state)
             .then(response => {
-                console.log(response)
+                console.log(response); 
+                alert('Compte crée ! ');
             })
             .catch( error => {
                 console.log(error);
@@ -34,9 +35,11 @@ import axios from 'axios'
     render() {
         const { username, email, password} = this.state
         return (
-            <div className="SignUp_container">
+            <>
+            <hr></hr>
+              <div className="SignUp_container">
                 
-                <h1>Créer un nouveau compte</h1>
+                <h2>Créer un nouveau compte</h2>
                 
                  <form onSubmit={this.submitHandler}>
                  <input placeholder="Nom" name="username" value={username} onChange={this.changeHandler}></input>
@@ -44,13 +47,16 @@ import axios from 'axios'
                 <input placeholder="Mot de passe" name="password" value={password} onChange={this.changeHandler}></input>
                 <label>
                     <input type="checkbox" />
-                    Compte administrateur
+                    <p> Compte administrateur</p>
                 </label>
                 
                 <button type='submit'>Créer mon compte</button>
                  </form>
 
             </div>
+            
+            </>
+          
         )
     }
 }

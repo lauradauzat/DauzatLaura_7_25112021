@@ -69,16 +69,42 @@ button:hover {
   font-family: 'Lato';
 }
 
-.SignIn_container {
+hr {
+  margin: 30px;
+}
+
+.SignIn_container, .SignUp_container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
-.SignIn_container form {
+.SignIn_container h2, .SignUp_container h2 {
+  color: rgba(38, 38, 38, 0.713);
+}
+
+.SignIn_container label, .SignUp_container label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.SignIn_container form, .SignUp_container form {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -89,13 +115,13 @@ button:hover {
   width: 80%;
 }
 
-.SignIn_container form input {
+.SignIn_container form input, .SignUp_container form input {
   outline: none;
   border: 0;
   border-bottom: #1d1d1d 1px solid;
 }
 
-.SignIn_container form button {
+.SignIn_container form button, .SignUp_container form button {
   background-color: #df2b2b;
   color: whitesmoke;
   height: 30px;
@@ -104,8 +130,30 @@ button:hover {
           box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
-.SignIn_container form * {
+.SignIn_container form *, .SignUp_container form * {
   margin: 5px 0;
+}
+
+.NewPost_container {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.NewPost_container .file-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.NewPost_container button {
+  width: auto;
+  background-color: #df2b2b;
+  color: whitesmoke;
+  border-radius: 5px;
+  border: none;
 }
 
 .feed-container {
@@ -138,6 +186,10 @@ button:hover {
   margin: 10px 0;
   -webkit-box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
           box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.postcard img {
+  max-width: 80%;
 }
 
 .postcard .up-container {

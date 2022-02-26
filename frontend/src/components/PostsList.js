@@ -7,6 +7,9 @@ import CommentairesContainer from "./CommentairesContainer";
 import ImgContainer from "./ImgContainer";
 import ProfileContainer from "./ProfileContainer";
 import TxtContainer from "./TxtContainer"; 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 
 function PostsList(props) {
@@ -100,8 +103,8 @@ function PostsList(props) {
                     {(function() {
                         if (props.userConnected == post.UserId) {
                             return  <div>
-                                        <button onClick={() => { deletePost(post.id)}}> X</button> 
-                                        <button  onClick={() => { modifyDisplay(post.id)}}> Modifier </button> 
+                                        <button onClick={() => { deletePost(post.id)}}> <FontAwesomeIcon icon={faTrash}/> </button> 
+                                        <button  onClick={() => { modifyDisplay(post.id)}}> <FontAwesomeIcon icon={faEdit}/> </button> 
                                             {displayInputs===post.id 
                                             &&  
                                             <form onSubmit={sendModifiedPhoto}>
@@ -114,7 +117,7 @@ function PostsList(props) {
                                             }
                                     </div>
                         } else if (admin) {
-                            return <div> <button onClick={() => { deletePost(post.id)}}> X</button></div>
+                            return <div> <button onClick={() => { deletePost(post.id)}}> <FontAwesomeIcon icon={faTrash}/></button></div>
                         }
                         })()}
 

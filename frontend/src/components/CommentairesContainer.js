@@ -1,6 +1,9 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
 import ProfileContainer from "./ProfileContainer";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 function CommentairesContainer(props){
 
@@ -180,9 +183,9 @@ function CommentairesContainer(props){
                             
                             {(function() {
                                             if (userConnected == comment.UserId ) {
-                                                return    <div><button onClick={() => { deletePost(comment.id)}}> X</button> <button  onClick={() => { modifyPost(comment.id)}}> Modifier </button></div>
+                                                return    <div><button onClick={() => { deletePost(comment.id)}}> <FontAwesomeIcon icon={faTrash}/> </button> <button  onClick={() => { modifyPost(comment.id)}}> <FontAwesomeIcon icon={faEdit}/>  </button></div>
                                             } else if (admin) {
-                                                return    <div><button onClick={() => { deletePost(comment.id)}}> X </button></div>
+                                                return    <div><button onClick={() => { deletePost(comment.id)}}> <FontAwesomeIcon icon={faTrash}/>  </button></div>
                                             }
                                             })()}
                                                   

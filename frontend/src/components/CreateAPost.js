@@ -74,13 +74,9 @@ function CreateAPost (props)  {
                  <form  onSubmit={submitHandler} encType="form-multipart">
                  <textarea placeholder="Say Something" name="postText" onChange={changeHandler}>{post}</textarea>
                  <div className='file-form'>
-                     <label>Choisir une image</label>
                      <input type="file" name="file" onChange={handleFile}></input>
-
+                     <button type='submit'>Publier</button>
                  </div>
-       
-                
-                <button type='submit'>Publier</button>
                  </form>
 
             </div>

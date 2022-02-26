@@ -43,7 +43,7 @@ function Login() {
             <div className="login">
                 <Banner />
                 <SignIn />
-                <button> Créer un nouveau compte</button>
+              
                 <SignUp />
                 
             </div>
