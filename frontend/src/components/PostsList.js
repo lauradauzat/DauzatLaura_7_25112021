@@ -95,8 +95,8 @@ function PostsList(props) {
                         </div>
                         <div className="delete-and-modify-container">
                             {(function() {
-                            if (props.userConnected == post.UserId) {
-                                return  <div>
+                            if ((props.userConnected == post.UserId) && (displayInputs != post.id)) {
+                                return  <>
                                             <button onClick={() => { deletePost(post.id)}}> <FontAwesomeIcon icon={faTrash}/> </button> 
                                             <button  onClick={() => { modifyDisplay(post.id)}}> <FontAwesomeIcon icon={faEdit}/> </button> 
                                                 {/* {displayInputs===post.id 
@@ -109,8 +109,8 @@ function PostsList(props) {
                                                 <button type='submit'>Confirmer les modifications</button>
                                                 </form>
                                                 } */}
-                                        </div>
-                            } else if (admin) {
+                                        </>
+                            } else if (admin  && (displayInputs != post.id)) {
                                 return <div> <button onClick={() => { deletePost(post.id)}}> <FontAwesomeIcon icon={faTrash}/></button></div>
                             }
                             })()}
