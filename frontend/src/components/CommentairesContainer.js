@@ -18,7 +18,7 @@ function CommentairesContainer(props){
     const access_token = localStorage.getItem('token'); 
     const { admin } = props; 
     const [inputComment, setInputComment] = useState(0); 
-    const [modifiedComment, setModifiedComment] = useState("");
+    const [modifiedComment, setModifiedComment] = useState();
     const [sendCom, setSendCom] = useState({
         commentBody: modifiedComment
     }) 
@@ -169,7 +169,7 @@ function CommentairesContainer(props){
                                 return    <div className="newcom-container"> 
                                 
                                 <form onSubmit={submitModifiedCommentHandler} commentId={comment.id}>
-                                <input className="com-container"  placeholder={comment.commentBody} name="commentText" value={modifiedComment} onChange={changeHandler} ></input>
+                                <input className="com-container"  placeholder={comment.commentBody}  name="commentText" value={modifiedComment} onChange={changeHandler} ></input>
                                    
                                 <button type='submit'><FontAwesomeIcon icon={faPaperPlane} /></button>
                                 </form>
@@ -190,7 +190,7 @@ function CommentairesContainer(props){
                                             } else if (admin  && (inputComment != comment.id )) {
                                                 return    <div className="com-buttons-container"><button onClick={() => { deletePost(comment.id)}}> <FontAwesomeIcon icon={faTrash}/>  </button></div>
                                             }
-                                            })()}
+                             })()}
                                                   
                             
                             

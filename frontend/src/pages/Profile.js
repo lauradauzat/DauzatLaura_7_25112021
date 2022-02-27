@@ -147,10 +147,7 @@ function Profile () {
                     <input placeholder="Nom" name="username" value={profile.username} onChange={changeHandler}></input>
                     <input placeholder="Email" name="email" value={profile.email} onChange={changeHandler}></input>
                     <input placeholder="Mot de passe" name="password" value="" onChange={changeHandler}></input>
-                    <label>
-                        <input type="checkbox" />
-                        Compte administrateur
-                    </label>
+                    
                     
                     <button type='submit'>Confirmer les modifications</button>
                   </form>
@@ -162,7 +159,7 @@ function Profile () {
 
                       <div> 
                          <p> E-mail : {profile.email}</p>  </div>
-                         {isAdmin == '1'  && <p>Profil admin : oui </p> }
+                         {isAdmin == '1'  && <p>Profil administrateur </p> }
 
                        <div>
                                    
@@ -179,7 +176,6 @@ function Profile () {
                               } else if (user.isAdmin) {
                                
                                 return <div> 
-                                <p> yoooo</p>
                                   <button  onClick={() => { deleteProfile()}}>   <FontAwesomeIcon icon={faTrash} /> </button>
                   
                               </div>

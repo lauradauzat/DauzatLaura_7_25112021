@@ -19,8 +19,8 @@ function TxtContainer(props){
     }
 
     const handleFile = e => {
-      console.log(e.target.files, "$$$$$$");
-      console.log(e.target.files[0], "$$$$$$");
+      // console.log(e.target.files, "$$$$$$");
+      // console.log(e.target.files[0], "$$$$$$");
       setImage(e.target.files[0])
       setSend({postText : text, image: images });
       console.log(send);
