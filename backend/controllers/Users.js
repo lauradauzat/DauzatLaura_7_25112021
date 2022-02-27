@@ -1,7 +1,5 @@
 const { Users }  = require("../models");
 const bcrypt = require('bcrypt'); 
-
-//jwt installé mais pas encore utilisé
 const jwt = require('jsonwebtoken');
 
 exports.signup = (req, res) => {
@@ -49,7 +47,6 @@ exports.login =  async (req, res, next) => {
       });
  
       res.json ("You are logged in"); 
-         // a rajouter : va renvoyer userId et token dans le local storage du navigateur 
       
     }); 
 

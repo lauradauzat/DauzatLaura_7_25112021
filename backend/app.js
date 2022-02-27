@@ -1,14 +1,10 @@
 const express = require("express");
-
 const helmet = require("helmet");
 const cors = require("cors"); 
 
 const postRoutes = require('./routes/Posts');
 const userRoutes = require('./routes/Users');
 const commentRoutes = require('./routes/Comments');
-const auth = require('./middlewares/auth'); 
-
-const path = require('path');
 const bodyParser = require("body-parser");
 
 const app = express();

@@ -18,6 +18,8 @@ button {
   margin: 2px;
 }
 
+
+
 .header img {
   width: 305px;
 }
@@ -28,6 +30,10 @@ button {
 
 .bannerSmall img {
   width: 100px;
+}
+
+.login {
+  background-color: white;
 }
 
 .logout {
