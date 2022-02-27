@@ -43,40 +43,40 @@ function PostsList(props) {
      const [image, setImage] = useState();
      const [send, setSend] = useState({image: image});
 
-    const handleFile = (e)=> {
-      //console.log(e.target.files, "$$$$$$");
-      //console.log(e.target.files[0], "$$$$$$");
-      setImage(e.target.files[0])
-      setSend({image: image });
-      //console.log(send);
-     }
+    // const handleFile = (e)=> {
+    //   //console.log(e.target.files, "$$$$$$");
+    //   //console.log(e.target.files[0], "$$$$$$");
+    //   setImage(e.target.files[0])
+    //   setSend({image: image });
+    //   //console.log(send);
+    //  }
 
-     const sendModifiedPhoto = (e) => {
-         e.preventDefault(); 
-         setSend();
-         const access_token = localStorage.getItem('token'); 
-         const dataArray = new FormData();
-         dataArray.append('image', image);
-         axios.put(`http://localhost:3001/posts/${e}`,  dataArray, {
-            headers: {
-              "Content-Type": "multipart/form-data", 
-              'Authorization': `token ${access_token}`
-            }
-          })
-            .then(response => {
-                console.log(response, 'posted'); 
-                let tmpPosts = [...posts];
-                tmpPosts.push(response.data); 
-                setPosts(tmpPosts); 
+    //  const sendModifiedPhoto = (e) => {
+    //      e.preventDefault(); 
+    //      setSend();
+    //      const access_token = localStorage.getItem('token'); 
+    //      const dataArray = new FormData();
+    //      dataArray.append('image', image);
+    //      axios.put(`http://localhost:3001/posts/${e}`,  dataArray, {
+    //         headers: {
+    //           "Content-Type": "multipart/form-data", 
+    //           'Authorization': `token ${access_token}`
+    //         }
+    //       })
+    //         .then(response => {
+    //             console.log(response, 'posted'); 
+    //             let tmpPosts = [...posts];
+    //             tmpPosts.push(response.data); 
+    //             setPosts(tmpPosts); 
                 
                 
-            })
-            .catch( error => {
-                console.log(error);
-            })
+    //         })
+    //         .catch( error => {
+    //             console.log(error);
+    //         })
   
          
-     }
+    //  }
 
     return (
         <>
@@ -86,7 +86,7 @@ function PostsList(props) {
             props.posts.slice(0).reverse().map((post) => (          
              <>
 
-                <div className="postcard" key = {post.id }>
+                <div className="postcard" key={post.id}>
 
                     <div className="main-up-container">
                         <div className="up-container">

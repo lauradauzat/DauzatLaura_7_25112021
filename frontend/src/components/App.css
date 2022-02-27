@@ -282,6 +282,7 @@ hr {
   border-radius: 5px;
   margin: 10px 0px;
   text-align: left;
+  padding-left: 5px;
 }
 
 .postcard .com-container {
@@ -298,7 +299,8 @@ hr {
 }
 
 .postcard .com-container * {
-  margin: 10px 0;
+  margin-right: 5px;
+  margin-top: 5px;
 }
 
 .postcard .commentsSection {

@@ -147,7 +147,8 @@ function CommentairesContainer(props){
         <>
           
         <form onSubmit={postComment} className="com-container">
-            <textarea placeholder="commentaires" value={newCommentText} onChange={ (e) => {  setNewCommentText(e.target.value); setNewComment({commentBody : e.target.value, 
+            <ProfileContainer  userId={userConnected}></ProfileContainer>
+            <textarea placeholder="Ecrire un nouveau commentaire ..." value={newCommentText} onChange={ (e) => {  setNewCommentText(e.target.value); setNewComment({commentBody : e.target.value, 
             PostId: props.postId, 
             UserId: userConnected}) }} > </textarea>
             <button><FontAwesomeIcon icon={faPaperPlane}/> </button>
@@ -166,6 +167,7 @@ function CommentairesContainer(props){
                                 if (inputComment === comment.id ) {
                             
                                 return    <div className="newcom-container"> 
+                                
                                 <form onSubmit={submitModifiedCommentHandler} commentId={comment.id}>
                                 <input className="com-container"  placeholder={comment.commentBody} name="commentText" value={modifiedComment} onChange={changeHandler} ></input>
                                    
