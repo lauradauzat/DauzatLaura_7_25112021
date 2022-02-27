@@ -18,8 +18,6 @@ button {
   margin: 2px;
 }
 
-
-
 .header img {
   width: 305px;
 }
@@ -30,10 +28,6 @@ button {
 
 .bannerSmall img {
   width: 100px;
-}
-
-.login {
-  background-color: white;
 }
 
 .logout {
@@ -347,6 +341,9 @@ hr {
   margin-left: 10px;
   text-align: left;
   padding-left: 10px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .profile-container form {

@@ -11,7 +11,7 @@ function TxtContainer(props){
     const [send, setSend] = useState({postText: text});
     
     
-
+//handle the modification of a post
     const  changeHandler = (e) => {
         setText(e.target.value)
         console.log(text);
@@ -26,43 +26,36 @@ function TxtContainer(props){
       console.log(send);
   }
   
-
-
     const sendModifiedText = (e) => {
         e.preventDefault();
         const access_token = localStorage.getItem('token');
         console.log(send); 
-        // setImage();
+        setImage();
         setSend();
-        // const dataArray = new FormData();
-        // dataArray.append('postText', text); 
-        //dataArray.append('UserId', userId); 
-        // dataArray.append('image', images);
-        // console.log('datatarray: ' + dataArray);
+        const dataArray = new FormData();
+        dataArray.append('postText', text); 
+        dataArray.append('image', images);
+        //console.log('datatarray: ' + dataArray);
         const urlSendModify = "http://localhost:3001/posts/"+props.postId; 
-        console.log('url' + urlSendModify)
-       
-        
-        //dataArray.append(json); 
-        axios.put(urlSendModify,  send, {
+        //console.log('url' + urlSendModify)
+        axios.put(urlSendModify,  dataArray, {
           headers: {
-              'Authorization': `token ${access_token}`
+              'Authorization': `token ${access_token}`, 
+              "Content-Type": "multipart/form-data"
           }
       })
+      .then(response => {
+        console.log(response, 'posted'); 
+        props.setDisplay(0); 
+        setText(text);     
+      })
+      .catch( error => {
+        console.log(error);
+      })
+    }
   
-            .then(response => {
-                console.log(response, 'posted'); 
-                props.setDisplay(0); 
-                setText(text); 
-                
-            
-                
-            })
-            .catch( error => {
-                console.log(error);
-            })
-      }
-  
+
+    //JSX
 
             return (
                 <>
@@ -75,9 +68,9 @@ function TxtContainer(props){
                     <form onSubmit={sendModifiedText}>
                       <input className="txt-container"  placeholder={props.text} name="postText" value={text} onChange={changeHandler}></input>
                        <div className="container">
-                          {<div className='file-form'>
+                          <div className='file-form'>
                                 <input type="file" name="file" onChange={handleFile}></input>
-                            </div> }
+                            </div> 
                           <button type='submit'>Modifier <FontAwesomeIcon icon={faPaperPlane} /></button>
                        </div>
                       
