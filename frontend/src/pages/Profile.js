@@ -142,7 +142,7 @@ function Profile () {
 
             if (displayInputs === true ) {
               
-              return    <div> 
+              return    <div className="profile-container"> 
                   <form onSubmit={sendModifyProfile}>
                     <input placeholder="Nom" name="username" value={profile.username} onChange={changeHandler}></input>
                     <input placeholder="Email" name="email" value={profile.email} onChange={changeHandler}></input>
@@ -158,7 +158,7 @@ function Profile () {
             } 
             else if (displayInputs === false)
             {
-              return   <><div> <h1> {profile.username}</h1> </div>
+              return   <><div className="profile-container"> <h1> {profile.username}</h1> </div>
 
                       <div> 
                          <p> E-mail : {profile.email}</p>  </div>

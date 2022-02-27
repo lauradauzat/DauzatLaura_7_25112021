@@ -1,6 +1,8 @@
 
 import React, { Component, useState } from 'react'
 import axios from 'axios'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEdit, faPaperPlane, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 
 function CreateAPost (props)  {
@@ -45,8 +47,7 @@ function CreateAPost (props)  {
                     console.log(response, 'posted'); 
                     let tmpPosts = [...postArray];
                     tmpPosts.push(response.data); 
-                    setPosts(tmpPosts); 
-                    
+                    setPosts(tmpPosts);                              
                     
                 })
                 .catch( error => {
@@ -75,7 +76,7 @@ function CreateAPost (props)  {
                  <textarea placeholder="Say Something" name="postText" onChange={changeHandler}>{post}</textarea>
                  <div className='file-form'>
                      <input type="file" name="file" onChange={handleFile}></input>
-                     <button type='submit'>Publier</button>
+                     <button type='submit'>Publier <FontAwesomeIcon icon={faPaperPlane} /></button>
                  </div>
                  </form>
 

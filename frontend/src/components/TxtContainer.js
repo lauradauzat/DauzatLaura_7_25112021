@@ -1,11 +1,13 @@
 import React, {useState} from "react";
 import axios from "axios";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEdit, faPaperPlane, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 
 function TxtContainer(props){
 
     const [text, setText] = useState(props.text); 
-    // const [images, setImage] = useState(props.images);
+     const [images, setImage] = useState(props.images);
     const [send, setSend] = useState({postText: text});
     
     
@@ -16,13 +18,13 @@ function TxtContainer(props){
         setSend({postText: text});
     }
 
-  //   const handleFile = e => {
-  //     console.log(e.target.files, "$$$$$$");
-  //     console.log(e.target.files[0], "$$$$$$");
-  //     setImage(e.target.files[0])
-  //     setSend({postText : text, image: images });
-  //     console.log(send);
-  // }
+    const handleFile = e => {
+      console.log(e.target.files, "$$$$$$");
+      console.log(e.target.files[0], "$$$$$$");
+      setImage(e.target.files[0])
+      setSend({postText : text, image: images });
+      console.log(send);
+  }
   
 
 
@@ -69,14 +71,16 @@ function TxtContainer(props){
   
               if (props.displayInputs === props.postId ) {
                 
-                return    <div> 
+                return    <div className="form-container"> 
                     <form onSubmit={sendModifiedText}>
                       <input className="txt-container"  placeholder={props.text} name="postText" value={text} onChange={changeHandler}></input>
-                        {/* <div className='file-form'>
-                            <label>Choisir une image</label>
-                            <input type="file" name="file" onChange={handleFile}></input>
-                         </div> */}
-                      <button type='submit'>Confirmer les modifications</button>
+                       <div className="container">
+                          {<div className='file-form'>
+                                <input type="file" name="file" onChange={handleFile}></input>
+                            </div> }
+                          <button type='submit'>Modifier <FontAwesomeIcon icon={faPaperPlane} /></button>
+                       </div>
+                      
                     </form>
                   </div>
               } 

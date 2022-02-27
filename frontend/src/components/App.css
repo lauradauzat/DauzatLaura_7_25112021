@@ -2,10 +2,26 @@ body {
   text-align: center;
   font-family: "Lato", sans-serif;
   color: #1d1d1d;
+  background-color: #e9ebee;
+  margin: 0;
+}
+
+button {
+  width: auto;
+  background-color: #ff5439;
+  color: whitesmoke;
+  border-radius: 5px;
+  border: none;
+  padding: 5px;
+  margin: 2px;
 }
 
 .header img {
   width: 305px;
+}
+
+.bannerSmall {
+  background-color: white;
 }
 
 .bannerSmall img {
@@ -26,6 +42,7 @@ body {
           box-shadow: rgba(240, 46, 170, 0.4) 0px 5px, rgba(240, 85, 46, 0.842) 0px 10px, rgba(204, 103, 21, 0.752) 0px 15px, rgba(234, 161, 27, 0.1) 0px 20px, rgba(253, 70, 38, 0.05) 0px 25px;
   margin-bottom: 40px;
   color: #d6694e;
+  background-color: white;
 }
 
 .bannerSmall img:hover {
@@ -122,7 +139,7 @@ hr {
 }
 
 .SignIn_container form button, .SignUp_container form button {
-  background-color: #df2b2b;
+  background-color: #ff5439;
   color: whitesmoke;
   height: 30px;
   border-radius: 5px;
@@ -150,7 +167,7 @@ hr {
 
 .NewPost_container button {
   width: auto;
-  background-color: #df2b2b;
+  background-color: #ff5439;
   color: whitesmoke;
   border-radius: 5px;
   border: none;
@@ -169,23 +186,43 @@ hr {
           align-items: center;
 }
 
+.authorName {
+  background-color: white;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1.38;
+  color: #ff5439;
+  text-decoration: none;
+  margin-bottom: 2px;
+  border: none;
+}
+
+.authorName:hover {
+  text-decoration: underline;
+}
+
 .postcard {
+  background-color: white;
+  width: 502px;
+  border: 1px solid #d0d1d5;
+  border-radius: 3px;
+  margin: auto;
+  margin-bottom: 10px;
+  padding: 12px;
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.postcard .main-up-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  width: 90%;
-  border-radius: 5px;
-  background-color: whitesmoke;
-  margin: 10px 0;
-  -webkit-box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-          box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 .postcard img {
@@ -196,24 +233,60 @@ hr {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  width: 90%;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.postcard .up-container .form-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+}
+
+.postcard .up-container .form-container form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  width: 100%;
+}
+
+.postcard .up-container .form-container form .container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 .postcard .txt-container {
   background-color: white;
   width: 90%;
   border-radius: 5px;
-  margin: 10px;
+  margin: 10px 0px;
+  text-align: left;
 }
 
 .postcard .com-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  width: 90%;
+  width: 100%;
 }
 
 .postcard .com-container textarea {
@@ -227,7 +300,7 @@ hr {
 }
 
 .postcard .commentsSection {
-  width: 90%;
+  width: 100%;
   margin-bottom: 10px;
 }
 
@@ -237,11 +310,53 @@ hr {
   display: flex;
   margin: 10px 0;
   border-radius: 5px;
+  width: 100%;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.postcard .com .newcom-container {
+  width: 100%;
+}
+
+.postcard .com form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+}
+
+.postcard .com form input {
+  width: 100%;
 }
 
 .postcard .com .commentText {
   width: 100%;
   border: solid grey 1px;
   margin-left: 10px;
+}
+
+.profile-container form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  /* max-width: 450px; */
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 20px;
+}
+
+.profile-container input {
+  outline: none;
+  border: 0;
+  border-bottom: #1d1d1d 1px solid;
+  padding: 5px;
+  width: 80%;
 }
 /*# sourceMappingURL=App.css.map */

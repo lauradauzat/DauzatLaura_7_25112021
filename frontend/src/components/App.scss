@@ -1,9 +1,23 @@
 $grey: rgb(29, 29, 29); 
+$red: rgb(255, 84, 57);
 
 body {
   text-align: center;
   font-family: "Lato", sans-serif;
   color: $grey;
+  background-color:#e9ebee;
+  margin: 0; 
+}
+
+//button style 
+button {
+  width: auto;
+  background-color: #ff5439;
+  color: whitesmoke;
+  border-radius: 5px;
+  border: none;
+  padding: 5px;
+  margin: 2px; 
 }
 
 
@@ -14,7 +28,9 @@ body {
 }
 
 
-
+.bannerSmall {
+  background-color: white;
+}
 .bannerSmall img {
   width: 100px;
 }
@@ -26,6 +42,7 @@ body {
   box-shadow: rgba(240, 46, 170, 0.4) 0px 5px, rgba(240, 85, 46, 0.842) 0px 10px, rgba(204, 103, 21, 0.752) 0px 15px, rgba(234, 161, 27, 0.1) 0px 20px, rgba(253, 70, 38, 0.05) 0px 25px;
   margin-bottom: 40px;
   color:rgb(214, 105, 78);
+  background-color: white;
 
 
 }
@@ -95,7 +112,7 @@ hr {
       border-bottom: $grey 1px solid;
     } 
     button {
-      background-color: rgb(223, 43, 43);
+      background-color: $red;
       color: whitesmoke;
       height: 30px;
       border-radius: 5px; 
@@ -126,7 +143,7 @@ hr {
   }
   button{
     width: auto;
-    background-color: rgb(223, 43, 43);
+    background-color: $red;
     color: whitesmoke;
     border-radius: 5px; 
     border: none;
@@ -148,29 +165,69 @@ hr {
 
 }
 
+.authorName {
+  background-color: white;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1.38;
+  color: $red; 
+  text-decoration: none;
+  margin-bottom: 2px;
+  border: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}  
+
 .postcard {
+
+  .main-up-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+   
   img {
     max-width: 80%;
   }
   .up-container {
     display: flex;
-    width: 90%;
-    align-items:center;
+    flex-direction: column;
+    width: 100%;
+    align-items:flex-start;
+    .form-container {
+      display: flex;
+      width: 100%;
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        .container {
+          display: flex;
+          width: 100%;
+          justify-content: space-between;
+        }
+       }
+    
+    }
   }
-  display: flex;
-
-  flex-direction: column;
-  align-items: center;
-  width: 90%;
-  border-radius: 5px;
-  background-color: whitesmoke;
-  margin: 10px 0;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  background-color:white;
+  width:502px;
+  border: 1px solid #d0d1d5;
+  border-radius:3px;
+  margin: auto;
+  margin-bottom:10px;
+  padding: 12px; 
+  
+  box-shadow: 0 0 5px rgba(0, 0, 0, .30);
   .txt-container {
     background-color: white;
     width: 90%; 
     border-radius: 5px;
-    margin: 10px;
+    margin: 10px 0px;
+    text-align: left;
+   
   }
 
   
@@ -178,7 +235,7 @@ hr {
 
   .com-container {
     display: flex;
-    width: 90%;
+    width: 100%;
 
 
 
@@ -194,7 +251,7 @@ hr {
   }
 
   .commentsSection {
-    width: 90%; 
+    width: 100%; 
     margin-bottom: 10px;
   }
 
@@ -202,6 +259,18 @@ hr {
       display: flex;
       margin: 10px 0;
       border-radius: 5px;
+      width: 100%;
+      justify-content: space-between;
+      .newcom-container {
+        width: 100%;
+    }
+      form {
+        display: flex;
+        width:100%;
+        input {
+          width: 100%;
+        }
+      }
 
       .commentText {
         width: 100%;
@@ -211,4 +280,26 @@ hr {
 
   }
   
+}
+
+
+//page profil
+.profile-container {
+  form {
+    display: flex;
+    flex-direction: column;
+    /* max-width: 450px; */
+    align-items: center;
+    margin: 20px;
+   
+    
+  }
+
+  input {
+    outline: none; 
+    border: 0; 
+    border-bottom: $grey 1px solid;
+    padding: 5px;
+    width: 80%;
+  } 
 }

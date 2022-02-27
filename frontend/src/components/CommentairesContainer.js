@@ -2,8 +2,9 @@ import React, {useState, useEffect} from "react";
 import axios from "axios";
 import ProfileContainer from "./ProfileContainer";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faPaperPlane, faTrash } from "@fortawesome/free-solid-svg-icons";
+
+
 
 function CommentairesContainer(props){
 
@@ -42,9 +43,9 @@ function CommentairesContainer(props){
 
 
     const modifyPost = (commentId) => {
-        console.log('goes into modify ');
+        //console.log('goes into modify ');
         setInputComment(commentId); 
-        console.log('dieeeeeeeeeees' + inputComment);
+        //console.log('dieeeeeeeeeees' + inputComment);
     
     }
 
@@ -54,7 +55,7 @@ function CommentairesContainer(props){
        setSendCom({
         commentBody: modifiedComment
         });
-       console.log(sendCom);
+       //console.log(sendCom);
   
     }
 
@@ -76,10 +77,10 @@ function CommentairesContainer(props){
             }
         })  
         .then(res => {
-            console.log(res, 'modified'); 
+            //console.log(res, 'modified'); 
             let tmpComments = [...comments];
-            console.log('tmp :' + tmpComments); 
-            console.log('res.data : ' + res.data); 
+            //console.log('tmp :' + tmpComments); 
+            //console.log('res.data : ' + res.data); 
             // let newComment = res.data; 
             // tmpComments.push(res.data); 
             //  setComments(tmpComments); 
@@ -149,7 +150,7 @@ function CommentairesContainer(props){
             <textarea placeholder="commentaires" value={newCommentText} onChange={ (e) => {  setNewCommentText(e.target.value); setNewComment({commentBody : e.target.value, 
             PostId: props.postId, 
             UserId: userConnected}) }} > </textarea>
-            <button> Envoyer un commentaire </button>
+            <button><FontAwesomeIcon icon={faPaperPlane}/> </button>
         </form>
 
         <div className="commentsSection">
@@ -164,11 +165,11 @@ function CommentairesContainer(props){
     
                                 if (inputComment === comment.id ) {
                             
-                                return    <div> 
+                                return    <div className="newcom-container"> 
                                 <form onSubmit={submitModifiedCommentHandler} commentId={comment.id}>
                                 <input className="com-container"  placeholder={comment.commentBody} name="commentText" value={modifiedComment} onChange={changeHandler} ></input>
                                    
-                                <button type='submit'>Confirmer les modifications</button>
+                                <button type='submit'><FontAwesomeIcon icon={faPaperPlane} /></button>
                                 </form>
                                 </div>
                             
@@ -182,10 +183,10 @@ function CommentairesContainer(props){
                         }
                             
                             {(function() {
-                                            if (userConnected == comment.UserId ) {
-                                                return    <div><button onClick={() => { deletePost(comment.id)}}> <FontAwesomeIcon icon={faTrash}/> </button> <button  onClick={() => { modifyPost(comment.id)}}> <FontAwesomeIcon icon={faEdit}/>  </button></div>
-                                            } else if (admin) {
-                                                return    <div><button onClick={() => { deletePost(comment.id)}}> <FontAwesomeIcon icon={faTrash}/>  </button></div>
+                                            if ((userConnected == comment.UserId) && (inputComment != comment.id )) {
+                                                return    <div className="com-buttons-container"><button onClick={() => { deletePost(comment.id)}}> <FontAwesomeIcon icon={faTrash}/> </button> <button  onClick={() => { modifyPost(comment.id)}}> <FontAwesomeIcon icon={faEdit}/>  </button></div>
+                                            } else if (admin  && (inputComment != comment.id )) {
+                                                return    <div className="com-buttons-container"><button onClick={() => { deletePost(comment.id)}}> <FontAwesomeIcon icon={faTrash}/>  </button></div>
                                             }
                                             })()}
                                                   

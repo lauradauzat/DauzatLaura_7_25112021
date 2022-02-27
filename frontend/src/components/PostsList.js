@@ -87,11 +87,37 @@ function PostsList(props) {
              <>
 
                 <div className="postcard" key = {post.id }>
-                        
-                     <div className="up-container">
-                    <ProfileContainer  userId={post.UserId}></ProfileContainer>
-                    <TxtContainer postId={post.id} text={post.postText} displayInputs={displayInputs} setDisplay={setDisplay} ></TxtContainer>
+
+                    <div className="main-up-container">
+                        <div className="up-container">
+                            <ProfileContainer  userId={post.UserId}></ProfileContainer>
+                            <TxtContainer postId={post.id} text={post.postText} displayInputs={displayInputs} setDisplay={setDisplay} ></TxtContainer>
+                        </div>
+                        <div className="delete-and-modify-container">
+                            {(function() {
+                            if (props.userConnected == post.UserId) {
+                                return  <div>
+                                            <button onClick={() => { deletePost(post.id)}}> <FontAwesomeIcon icon={faTrash}/> </button> 
+                                            <button  onClick={() => { modifyDisplay(post.id)}}> <FontAwesomeIcon icon={faEdit}/> </button> 
+                                                {/* {displayInputs===post.id 
+                                                &&  
+                                                <form onSubmit={sendModifiedPhoto}>
+                                                <div className='file-form'>
+                                                        <label>Choisir une image</label>
+                                                        <input type="file" name="file" onChange={handleFile}></input>
+                                                </div>
+                                                <button type='submit'>Confirmer les modifications</button>
+                                                </form>
+                                                } */}
+                                        </div>
+                            } else if (admin) {
+                                return <div> <button onClick={() => { deletePost(post.id)}}> <FontAwesomeIcon icon={faTrash}/></button></div>
+                            }
+                            })()}
+                        </div>
                     </div>
+
+                     
                             
                     <ImgContainer imageRef={post.image}></ImgContainer>
                             
@@ -100,26 +126,7 @@ function PostsList(props) {
                 
                  <div>
 
-                    {(function() {
-                        if (props.userConnected == post.UserId) {
-                            return  <div>
-                                        <button onClick={() => { deletePost(post.id)}}> <FontAwesomeIcon icon={faTrash}/> </button> 
-                                        <button  onClick={() => { modifyDisplay(post.id)}}> <FontAwesomeIcon icon={faEdit}/> </button> 
-                                            {displayInputs===post.id 
-                                            &&  
-                                            <form onSubmit={sendModifiedPhoto}>
-                                            <div className='file-form'>
-                                                    <label>Choisir une image</label>
-                                                    <input type="file" name="file" onChange={handleFile}></input>
-                                            </div>
-                                            <button type='submit'>Confirmer les modifications</button>
-                                            </form>
-                                            }
-                                    </div>
-                        } else if (admin) {
-                            return <div> <button onClick={() => { deletePost(post.id)}}> <FontAwesomeIcon icon={faTrash}/></button></div>
-                        }
-                        })()}
+                   
 
                      </div>
                   
