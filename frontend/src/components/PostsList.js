@@ -43,40 +43,6 @@ function PostsList(props) {
      const [image, setImage] = useState();
      const [send, setSend] = useState({image: image});
 
-    // const handleFile = (e)=> {
-    //   //console.log(e.target.files, "$$$$$$");
-    //   //console.log(e.target.files[0], "$$$$$$");
-    //   setImage(e.target.files[0])
-    //   setSend({image: image });
-    //   //console.log(send);
-    //  }
-
-    //  const sendModifiedPhoto = (e) => {
-    //      e.preventDefault(); 
-    //      setSend();
-    //      const access_token = localStorage.getItem('token'); 
-    //      const dataArray = new FormData();
-    //      dataArray.append('image', image);
-    //      axios.put(`http://localhost:3001/posts/${e}`,  dataArray, {
-    //         headers: {
-    //           "Content-Type": "multipart/form-data", 
-    //           'Authorization': `token ${access_token}`
-    //         }
-    //       })
-    //         .then(response => {
-    //             console.log(response, 'posted'); 
-    //             let tmpPosts = [...posts];
-    //             tmpPosts.push(response.data); 
-    //             setPosts(tmpPosts); 
-                
-                
-    //         })
-    //         .catch( error => {
-    //             console.log(error);
-    //         })
-  
-         
-    //  }
 
     return (
         <>
@@ -90,7 +56,7 @@ function PostsList(props) {
 
                     <div className="main-up-container">
                         <div className="up-container">
-                            <ProfileContainer  userId={post.UserId}></ProfileContainer>
+                            <ProfileContainer  userId={post.UserId} createdAt={post.createdAt} > </ProfileContainer>
                             <TxtContainer postId={post.id} text={post.postText} displayInputs={displayInputs} setDisplay={setDisplay} ></TxtContainer>
                         </div>
                         <div className="delete-and-modify-container">
@@ -99,16 +65,6 @@ function PostsList(props) {
                                 return  <>
                                             <button onClick={() => { deletePost(post.id)}}> <FontAwesomeIcon icon={faTrash}/> </button> 
                                             <button  onClick={() => { modifyDisplay(post.id)}}> <FontAwesomeIcon icon={faEdit}/> </button> 
-                                                {/* {displayInputs===post.id 
-                                                &&  
-                                                <form onSubmit={sendModifiedPhoto}>
-                                                <div className='file-form'>
-                                                        <label>Choisir une image</label>
-                                                        <input type="file" name="file" onChange={handleFile}></input>
-                                                </div>
-                                                <button type='submit'>Confirmer les modifications</button>
-                                                </form>
-                                                } */}
                                         </>
                             } else if (admin  && (displayInputs != post.id)) {
                                 return <div> <button onClick={() => { deletePost(post.id)}}> <FontAwesomeIcon icon={faTrash}/></button></div>

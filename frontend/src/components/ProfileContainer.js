@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom"; 
+import DayJS from 'react-dayjs';
+
 
 function ProfileContainer(props){
 
@@ -34,11 +36,16 @@ function ProfileContainer(props){
 
             const fetchProfilePage = '/profile/'+profile.id ; 
             console.log(profile); 
+            const date = props.createdAt; 
+
+            
 
             return (
                 <>
                 <div className="authorName-container" >
                     <button className="authorName" onClick={() => {history.push(fetchProfilePage)}}> {profile.username}</button>
+                    <DayJS  className="dayJs" format="DD-MM-YYYY">{ date }</DayJS>
+                    
                     
                 </div>
                    

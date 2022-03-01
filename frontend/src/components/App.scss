@@ -166,6 +166,11 @@ hr {
 
 }
 
+.authorName-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 80px;
+}
 .authorName {
   background-color: white;
   font-size: 14px;
@@ -178,7 +183,15 @@ hr {
   &:hover {
     text-decoration: underline;
   }
+
 }  
+
+.dayJs {
+  color: #cccccc;
+  font-size: x-small;
+}
+
+
 
 .postcard {
 

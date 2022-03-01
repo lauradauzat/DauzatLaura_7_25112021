@@ -158,7 +158,7 @@ function CommentairesContainer(props){
 
              {comments.map( comment => (
                      <div className="com" key={comment.id}>
-                         <ProfileContainer userId={comment.UserId}/>
+                         <ProfileContainer createdAt={comment.createdAt} userId={comment.UserId}/>
 
                          
                          {
