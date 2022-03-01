@@ -3,6 +3,7 @@ import axios from "axios";
 import ProfileContainer from "./ProfileContainer";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faPaperPlane, faTrash } from "@fortawesome/free-solid-svg-icons";
+//import { response } from "../../../backend/app";
 
 
 
@@ -77,13 +78,17 @@ function CommentairesContainer(props){
             }
         })  
         .then(res => {
-            //console.log(res, 'modified'); 
+            console.log(res, 'modified'); 
+            setInputComment(0);
             let tmpComments = [...comments];
-            //console.log('tmp :' + tmpComments); 
-            //console.log('res.data : ' + res.data); 
-            // let newComment = res.data; 
-            // tmpComments.push(res.data); 
-            //  setComments(tmpComments); 
+            let mComment = tmpComments.find(item => item.id == res.data.id);
+            console.log('--------------------');
+            console.log(res.data); 
+            console.log(mComment);
+            console.log('--------------------');
+            mComment.commentBody = res.data.commentBody; 
+            setComments(tmpComments); 
+        
             setInputComment(0);
         
         })
