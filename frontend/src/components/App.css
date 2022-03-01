@@ -52,7 +52,7 @@ button {
 }
 
 button.logOut {
-  background-color: none;
+  background-color: transparent;
   outline: none;
   margin-right: 10px;
 }
