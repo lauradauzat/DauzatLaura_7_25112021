@@ -16,7 +16,7 @@ function TxtContainer(props){
 //handle the modification of a post
     const  changeHandler = (e) => {
         setText(e.target.value)
-        console.log(text);
+       // console.log(text);
         setSend({postText: text});
     }
 
@@ -25,13 +25,13 @@ function TxtContainer(props){
       // console.log(e.target.files[0], "$$$$$$");
       setImage(e.target.files[0])
       setSend({postText : text, image: images });
-      console.log(send);
+      //console.log(send);
   }
   
     const sendModifiedText = (e) => {
         e.preventDefault();
         const access_token = localStorage.getItem('token');
-        console.log(send); 
+       // console.log(send); 
         setImage();
         setSend();
         const dataArray = new FormData();
@@ -51,10 +51,10 @@ function TxtContainer(props){
         const newPosts = [...posts];  
         const mPost = newPosts.find(item => item.id == response.data.post.id); 
        
-        console.log('--------------------');
-        console.log(response.data); 
-        console.log(mPost);
-        console.log('--------------------');
+        // console.log('--------------------');
+        // console.log(response.data); 
+        // console.log(mPost);
+        // console.log('--------------------');
         mPost.postText = response.data.post.postText;
         mPost.image = response.data.post.image;  
         setPosts(newPosts);

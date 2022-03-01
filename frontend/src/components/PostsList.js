@@ -45,6 +45,22 @@ function PostsList(props) {
      const [send, setSend] = useState({image: image});
 
 
+    // const fetchImg = (e) => {
+
+    // }
+    //  const fetchUrl = 'http://localhost:3001/'+props.imageRef; 
+    
+    //  useEffect(() =>{
+    //      fetch(fetchUrl)
+    //          .then(response => response.blob())
+    //          .then(image => {
+    //              // Create a local URL of that image
+    //              const localUrl = URL.createObjectURL(image);
+    //              setImageData(localUrl);
+    //          });
+    //  }, []); 
+
+
     return (
         <>
        
@@ -59,7 +75,8 @@ function PostsList(props) {
                         <div className="up-container">
                             <ProfileContainer  userId={post.UserId} createdAt={post.createdAt} > </ProfileContainer>
                             <TxtContainer postId={post.id} text={post.postText} displayInputs={displayInputs} setDisplay={setDisplay} posts={posts} setPosts={setPosts}></TxtContainer>
-                            {/* <div> <img src={config.apiUrl+'/'+post.image}></img> </div> */}
+                            {/* {}
+                            <div><img className="img" src={require(config.apiUrl+'/'+post.image)}/></div> */}
 
                         </div>
                         <div className="delete-and-modify-container">
@@ -77,8 +94,8 @@ function PostsList(props) {
                     </div>
 
                      
-                            
-                    <ImgContainer imageRef={post.image}></ImgContainer>
+                    {post.image != null && <ImgContainer imageRef={post.image}></ImgContainer>}
+                    
                             
                     <CommentairesContainer postId={post.id} admin={admin} ></CommentairesContainer>
                 
