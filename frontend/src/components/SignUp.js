@@ -21,10 +21,10 @@ import axios from 'axios'
 
     submitHandler = e => {
         e.preventDefault()
-        console.log(this.state)
+        //console.log(this.state)
         axios.post("http://localhost:3001/auth/signup", this.state)
             .then(response => {
-                console.log(response); 
+               // console.log(response); 
                 alert('Compte crée ! ');
             })
             .catch( error => {

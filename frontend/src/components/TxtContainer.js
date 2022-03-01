@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEdit, faPaperPlane, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import config from "../config"; 
 
 
@@ -47,7 +47,7 @@ function TxtContainer(props){
           }
       })
       .then(response => {
-        console.log(  response.data, 'posted'); 
+        //console.log(  response.data, 'posted'); 
         const newPosts = [...posts];  
         const mPost = newPosts.find(item => item.id == response.data.post.id); 
        

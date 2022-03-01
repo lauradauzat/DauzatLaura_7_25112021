@@ -19,7 +19,7 @@ function ProfileContainer(props){
                     'Authorization': `token ${access_token}`
                 }
             }).then(res => {
-                console.log('profile container res: ' + res)
+               // console.log('profile container res: ' + res)
                 setProfile(res.data)
             })
             .catch(err => {
@@ -35,7 +35,7 @@ function ProfileContainer(props){
         } else {
 
             const fetchProfilePage = '/profile/'+profile.id ; 
-            console.log(profile); 
+          //  console.log(profile); 
             const date = props.createdAt; 
 
             

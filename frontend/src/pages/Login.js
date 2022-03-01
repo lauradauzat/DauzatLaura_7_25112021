@@ -8,12 +8,13 @@ import SignUp from '../components/SignUp'
 import Banner from '../components/Banner'
 import LogoutBtn from '../components/LogoutBtn'
 import BannerSmall from '../components/BannerSmall'
+import config from "../config";
 
 
 function Login() {
 
     const userConnected = localStorage.getItem('id'); 
-    const userIdUrl = 'http://localhost:3001/auth/'+userConnected; 
+    const userIdUrl = config.apiUrl+'/auth/'+userConnected; 
     const [user, getUser] = useState([])
     const access_token = localStorage.getItem('token');
 

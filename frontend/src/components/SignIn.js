@@ -28,10 +28,10 @@ function populateStorage(id, token, isAdmin) {
 
     submitHandler = e => {
         e.preventDefault()
-        console.log(this.state); 
+       // console.log(this.state); 
         axios.post("http://localhost:3001/auth/login", this.state)
             .then(response => {
-                console.log(response.data, 'you are logged in'); 
+                //console.log(response.data, 'you are logged in'); 
                 populateStorage(response.data.userId,response.data.token, response.data.isAdmin); 
                 window.location.reload();
             })

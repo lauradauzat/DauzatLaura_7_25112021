@@ -5,7 +5,7 @@ import { Fragment } from "react";
 
 function ImgContainer(props){
     const [imageData, setImageData] = useState('');
-    const fetchUrl = 'http://localhost:3001/' + props.imageRef; 
+    const fetchUrl = 'http://localhost:3001/'+props.imageRef; 
     
     useEffect(() =>{
         fetch(fetchUrl)

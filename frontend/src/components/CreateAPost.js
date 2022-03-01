@@ -1,8 +1,8 @@
 
-import React, { Component, useState } from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEdit, faPaperPlane, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
 
 function CreateAPost (props)  {
@@ -22,7 +22,7 @@ function CreateAPost (props)  {
 
     const submitHandler = (e)  => {
         e.preventDefault()
-        console.log('post ' + post)
+        //console.log('post ' + post)
         setSend()
         const access_token = localStorage.getItem('token'); 
         const dataArray = new FormData();

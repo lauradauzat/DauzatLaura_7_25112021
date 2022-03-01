@@ -1,8 +1,9 @@
-import React, { Component, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from "axios"; 
 import CreateAPost  from '../components/CreateAPost'
 import PostsList from '../components/PostsList'
 import Login from './Login'
+import config from '../config';
 
 function Feed() {
 
@@ -10,8 +11,8 @@ function Feed() {
     const [user, setUser] = useState([])
     const userConnected = localStorage.getItem('id'); 
 
-    const url =  "http://localhost:3001/posts"; 
-    const userIdUrl = 'http://localhost:3001/auth/'+userConnected; 
+    const url =  config.apiUrl+"/posts"; 
+    const userIdUrl = config.apiUrl+'/auth/'+userConnected; 
     const access_token = localStorage.getItem('token'); 
 
 

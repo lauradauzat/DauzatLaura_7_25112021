@@ -34,7 +34,7 @@ function CommentairesContainer(props){
             }
         })  
         .then(res => {
-            console.log(res, 'deleted');  
+            //console.log(res, 'deleted');  
             setComments(comments.filter((comment) => comment.id !== e));  
         })
         .catch( error => {
@@ -70,7 +70,7 @@ function CommentairesContainer(props){
         // console.log('submit handler clicked')
     
         setSendCom({commentBody : modifiedComment});
-        console.log ('sendcom   = ' + sendCom); 
+        //console.log ('sendcom   = ' + sendCom); 
        
         axios.put(modifyCommentUrl, sendCom, {
             headers: {
@@ -82,10 +82,10 @@ function CommentairesContainer(props){
             setInputComment(0);
             let tmpComments = [...comments];
             let mComment = tmpComments.find(item => item.id == res.data.id);
-            console.log('--------------------');
-            console.log(res.data); 
-            console.log(mComment);
-            console.log('--------------------');
+            // console.log('--------------------');
+            // console.log(res.data); 
+            // console.log(mComment);
+            // console.log('--------------------');
             mComment.commentBody = res.data.commentBody; 
             setComments(tmpComments); 
         
@@ -113,14 +113,14 @@ function CommentairesContainer(props){
         setNewComment({commentBody : newCommentText, 
             PostId: props.postId, 
             UserId: userConnected})
-        console.log(newComment); 
+            // console.log(newComment); 
         
         axios.post(postCommentUrl, newComment, {
             headers: {
                 'Authorization': `token ${access_token}`
             }
         }).then(res => {
-            console.log(res); 
+            //console.log(res); 
             let tmpComments = [...comments];
             tmpComments.push(res.data); 
             setComments(tmpComments); 
@@ -139,7 +139,7 @@ function CommentairesContainer(props){
                 'Authorization': `token ${access_token}`
             }
         }).then(res => {
-            console.log(res)
+            //console.log(res)
             setComments(res.data)
         })
         .catch(err => {

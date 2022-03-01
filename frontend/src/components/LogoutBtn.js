@@ -1,10 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
-function logOutandReload(e){
 
-}
 
 function LogoutBtn(props) {
     const logOutandReload = (e) => {

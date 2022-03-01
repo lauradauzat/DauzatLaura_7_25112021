@@ -1,7 +1,6 @@
 
 import React, {useState, useEffect} from "react";
 import axios from "axios"; 
-import { useHistory  } from "react-router-dom";
 import './App';
 import CommentairesContainer from "./CommentairesContainer";
 import ImgContainer from "./ImgContainer";
@@ -21,13 +20,13 @@ function PostsList(props) {
 
 
     const deletePost = (e) => {
-        axios.delete(`http://localhost:3001/posts/${e}`, {
+        axios.delete(config.apiUrl+`/posts/${e}`, {
             headers: {
                 'Authorization': `token ${access_token}`
             }
         })  
         .then(response => {
-            console.log(response, 'deleted');
+            //console.log(response, 'deleted');
             setPosts(posts.filter((post) => post.id !== e));
         })
         .catch( error => {
@@ -41,24 +40,10 @@ function PostsList(props) {
         setDisplay(postId); 
     }
 
-     const [image, setImage] = useState();
-     const [send, setSend] = useState({image: image});
+   //  const [image, setImage] = useState();
+    // const [send, setSend] = useState({image: image});
 
 
-    // const fetchImg = (e) => {
-
-    // }
-    //  const fetchUrl = 'http://localhost:3001/'+props.imageRef; 
-    
-    //  useEffect(() =>{
-    //      fetch(fetchUrl)
-    //          .then(response => response.blob())
-    //          .then(image => {
-    //              // Create a local URL of that image
-    //              const localUrl = URL.createObjectURL(image);
-    //              setImageData(localUrl);
-    //          });
-    //  }, []); 
 
 
     return (
@@ -67,8 +52,7 @@ function PostsList(props) {
         <div className="feed-container">
         {  
             props.posts.slice(0).reverse().map((post) => (          
-             <>
-
+                       
                 <div className="postcard" key={post.id}>
 
                     <div className="main-up-container">
@@ -108,12 +92,9 @@ function PostsList(props) {
                   
                         
                   
-                    </div>
+                </div>
                          
-                        
-                    </>    
-                    
-                    ))
+             ))
         }
         </div>
 

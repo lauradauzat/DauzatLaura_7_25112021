@@ -6,6 +6,7 @@ import BannerSmall from "../components/BannerSmall";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import config from "../config";
 
 
 function Profile () {
@@ -16,9 +17,9 @@ function Profile () {
   const fetchUrl = 'http://localhost:3001/auth/'+id; 
   const userConnected = localStorage.getItem('id'); 
   const access_token = localStorage.getItem('token');
-  const userConnectedIsAdmin = localStorage.getItem('isAdmin'); 
+  //const userConnectedIsAdmin = localStorage.getItem('isAdmin'); 
   const [user, setUser] = useState([]);
-  const userIdUrl = 'http://localhost:3001/auth/'+userConnected; 
+  const userIdUrl = config.apiUrl+'/auth/'+userConnected; 
   const backToFeed = "/";
   const isAdmin = profile.isAdmin; 
 
@@ -62,20 +63,20 @@ function Profile () {
 
 
   const displayModifyProfile = (e, displayInputs) => {
-    console.log('goes into display modify profile function');
+    //console.log('goes into display modify profile function');
     setDisplay(true); 
   }
 
   const sendModifyProfile = e => {
     e.preventDefault();
-    console.log(profile); 
-          axios.put('http://localhost:3001/auth/'+id, profile, {
+   // console.log(profile); 
+          axios.put(config.apiUrl+'/auth/'+id, profile, {
             headers: {
                 'Authorization': `token ${access_token}`
             }
         })
           .then(res => {
-            console.log(res); 
+            //console.log(res); 
             setDisplay(false);
         })
         .catch(err => {
@@ -90,11 +91,11 @@ function Profile () {
 
 
   const deleteProfile = (e) => {
-    console.log('goes into delete profile funciton');
+    //console.log('goes into delete profile funciton');
 
     const confirm = window.confirm('Êtes vous sur.e de vouloir supprimer ce profil ? ');
     if (confirm) {
-          axios.delete('http://localhost:3001/auth/'+id, {
+          axios.delete(config.apiUrl+'/auth/'+id, {
             headers: {
                 'Authorization': `token ${access_token}`
             }
@@ -114,15 +115,15 @@ function Profile () {
   }
 
   const redirectionProcessAfterDelete = (e) => {
-    console.log('userconisadmin' + userConnectedIsAdmin); 
-    console.log('proilfuserID : ' + profile.id);
-    console.log('userConnected : ' + userConnected );
+    // console.log('userconisadmin' + userConnectedIsAdmin); 
+    // console.log('proilfuserID : ' + profile.id);
+    // console.log('userConnected : ' + userConnected );
     if (userConnected == profile.id){
-      console.log('goes to login');
+      //console.log('goes to login');
       localStorage.clear();
       history.push(backToFeed);
     } else {
-      console.log('goes to feed'); 
+      //console.log('goes to feed'); 
       history.push(backToFeed);
     }
   }
