@@ -44,7 +44,7 @@ import axios from 'axios'
                  <form onSubmit={this.submitHandler}>
                  <input placeholder="Nom" name="username" value={username} onChange={this.changeHandler}></input>
                 <input placeholder="Email" name="email" value={email} onChange={this.changeHandler}></input>
-                <input placeholder="Mot de passe" name="password" value={password} onChange={this.changeHandler}></input>
+                <input placeholder="Mot de passe" name="password" type="password" value={password} onChange={this.changeHandler}></input>
                 <label>
                     <input type="checkbox" />
                     <p> Compte administrateur</p>

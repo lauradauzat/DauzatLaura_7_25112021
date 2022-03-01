@@ -47,7 +47,7 @@ function populateStorage(id, token, isAdmin) {
 
                  <form onSubmit={this.submitHandler}>
                     <input placeholder="Nom" name="username" value={username} onChange={this.changeHandler}></input>
-                    <input placeholder="Mot de passe" name="password" value={password} onChange={this.changeHandler}></input>
+                    <input placeholder="Mot de passe" name="password" type="password" value={password} onChange={this.changeHandler}></input>
                     
                     <button type='submit'>Se connecter</button>
                  </form>
