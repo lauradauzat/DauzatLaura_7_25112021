@@ -1,5 +1,5 @@
 const express = require("express");
-const helmet = require("helmet");
+//const helmet = require("helmet");
 const cors = require("cors"); 
 
 const postRoutes = require('./routes/Posts');
@@ -9,7 +9,7 @@ const bodyParser = require("body-parser");
 
 const app = express();
 app.use(cors()); 
-app.use(helmet());
+//app.use(helmet());
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');

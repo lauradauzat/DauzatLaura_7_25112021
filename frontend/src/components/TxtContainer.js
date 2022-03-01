@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faPaperPlane, faTrash } from "@fortawesome/free-solid-svg-icons";
+import config from "../config"; 
 
 
 function TxtContainer(props){
@@ -9,6 +10,7 @@ function TxtContainer(props){
     const [text, setText] = useState(props.text); 
      const [images, setImage] = useState(props.images);
     const [send, setSend] = useState({postText: text});
+    let { posts, setPosts } = props;
     
     
 //handle the modification of a post
@@ -36,7 +38,7 @@ function TxtContainer(props){
         dataArray.append('postText', text); 
         dataArray.append('image', images);
         //console.log('datatarray: ' + dataArray);
-        const urlSendModify = "http://localhost:3001/posts/"+props.postId; 
+        const urlSendModify = config.apiUrl+"/posts/"+props.postId; 
         //console.log('url' + urlSendModify)
         axios.put(urlSendModify,  dataArray, {
           headers: {
@@ -45,7 +47,17 @@ function TxtContainer(props){
           }
       })
       .then(response => {
-        console.log(response, 'posted'); 
+        console.log(  response.data, 'posted'); 
+        const newPosts = [...posts];  
+        const mPost = newPosts.find(item => item.id == response.data.post.id); 
+       
+        console.log('--------------------');
+        console.log(response.data); 
+        console.log(mPost);
+        console.log('--------------------');
+        mPost.postText = response.data.post.postText;
+        mPost.image = response.data.post.image;  
+        setPosts(newPosts);
         props.setDisplay(0); 
         setText(text);     
       })

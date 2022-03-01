@@ -10,6 +10,7 @@ import TxtContainer from "./TxtContainer";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import config from "../config"
 
 
 function PostsList(props) {
@@ -57,7 +58,9 @@ function PostsList(props) {
                     <div className="main-up-container">
                         <div className="up-container">
                             <ProfileContainer  userId={post.UserId} createdAt={post.createdAt} > </ProfileContainer>
-                            <TxtContainer postId={post.id} text={post.postText} displayInputs={displayInputs} setDisplay={setDisplay} ></TxtContainer>
+                            <TxtContainer postId={post.id} text={post.postText} displayInputs={displayInputs} setDisplay={setDisplay} posts={posts} setPosts={setPosts}></TxtContainer>
+                            {/* <div> <img src={config.apiUrl+'/'+post.image}></img> </div> */}
+
                         </div>
                         <div className="delete-and-modify-container">
                             {(function() {
